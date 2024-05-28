@@ -14,6 +14,12 @@ public class SetPokeIndexFinger : MonoBehaviour
     }
     public void SetPokePoint()
     {
+
         xrPokeInteractor.attachTransform = IndexFinger;
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position + transform.rotation * xrPokeInteractor.attachTransform.transform.position, xrPokeInteractor.pokeInteractionOffset);
     }
 }

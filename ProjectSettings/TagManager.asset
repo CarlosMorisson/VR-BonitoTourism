@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Meteor
+  - Audio
+  - Stone
+  - Grass
+  - Home
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -14,7 +19,7 @@ TagManager:
   - UI
   - ShipCollider
   - Doors
-  - 
+  - Audio
   - 
   - 
   - 

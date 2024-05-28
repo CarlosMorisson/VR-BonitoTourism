@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b11748766c767e748b3ccac0f7af7017, type: 3}
+  m_Name: New SO Introduction
+  m_EditorClassIdentifier: 
+  HomeTransform: {fileID: 8842030030582596352, guid: 2140222d2fa77c742a961620ec4b8ddf, type: 3}
+  DustParticle: {fileID: 1597063089304374802, guid: 02facf78f24bab24289388f5d6ae434f, type: 3}
+  IntroductionAudio: {fileID: 8300000, guid: 9afebb84df5fa494592974bacf49ca0a, type: 3}
+  arrowLocals: []
+  TimeToStartGame: 5

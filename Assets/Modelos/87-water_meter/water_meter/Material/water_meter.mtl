@@ -1,0 +1,107 @@
+# Blender MTL File: 'water_meter.blend'
+# Material Count: 10
+
+newmtl Material
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Bump -bm 0.300000 C:\\Users\\zak keren\\Desktop\\water_meter\\Texturizer\\texture_semen.jpg
+map_Kd C:\\Users\\zak keren\\Desktop\\water_meter\\Texturizer\\texture_semen.jpg
+
+newmtl col_1
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.002718 0.127940 0.425952
+Ks 0.300000 0.300000 0.300000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl col_2
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.015077 0.015077 0.015077
+Ks 0.100000 0.100000 0.100000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl col_4
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.000531 0.000000
+Ks 0.200000 0.200000 0.200000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl col_5
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.061739 0.578424 0.392701
+Ks 0.200000 0.200000 0.200000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl col_master_stop
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.730479 0.664616 0.515584
+Ks 0.200000 0.200000 0.200000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl col_master_water_meter
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl uv_tex_keran
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.200000 0.200000 0.200000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+refl C:\\Users\\zak keren\\Desktop\\water_meter\\Texturizer\\Blury.jpg
+
+newmtl uv_text_angka
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.002677 0.127169 0.426621
+Ks 0.300000 0.300000 0.300000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\zak keren\\Desktop\\water_meter\\Texturizer\\uv_water_meter_4.png
+
+newmtl uv_text_water_1
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.010962 0.010962 0.010962
+Ks 0.200000 0.200000 0.200000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\zak keren\\Desktop\\water_meter\\Texturizer\\uv_water_meter_2.png
