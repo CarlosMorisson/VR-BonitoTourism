@@ -6,20 +6,20 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class SetPokeIndexFinger : MonoBehaviour
 {
     public Transform IndexFinger;
+    [SerializeField]
     private XRPokeInteractor xrPokeInteractor;
-    void Start()
+    [SerializeField]
+    private GameObject Circle;
+    void OnEnable()
     {
         xrPokeInteractor = transform.parent.parent.GetComponentInChildren<XRPokeInteractor>();
+        
         SetPokePoint();
     }
     public void SetPokePoint()
     {
 
         xrPokeInteractor.attachTransform = IndexFinger;
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position + transform.rotation * xrPokeInteractor.attachTransform.transform.position, xrPokeInteractor.pokeInteractionOffset);
+        Circle.transform.localScale = new Vector3(xrPokeInteractor.pokeSelectWidth, xrPokeInteractor.pokeSelectWidth, xrPokeInteractor.pokeSelectWidth);
     }
 }
