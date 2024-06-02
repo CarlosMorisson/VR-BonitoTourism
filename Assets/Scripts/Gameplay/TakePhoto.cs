@@ -45,14 +45,20 @@ public class TakePhoto : MonoBehaviour
     private void CheckColliders()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius, layerMask);
-
+        
         // Itera sobre os colisores encontrados
         foreach (Collider collider in colliders)
         {
+            Debug.Log("entrou");
             if (collider.CompareTag("Water"))
             {
                 // Faça algo quando colidir com um objeto que tenha a tag "Water"
                 Debug.Log("Collision with Water object detected!");
+            }
+            else
+            {
+                Debug.Log(collider.gameObject.tag);
+                Debug.Log(collider.gameObject.name);
             }
         }
     }

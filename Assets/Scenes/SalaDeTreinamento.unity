@@ -936,6 +936,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 57aac7c350400c946bc62531faee7c08, type: 3}
+      propertyPath: m_TagString
+      value: Water
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4368,6 +4372,7 @@ GameObject:
   - component: {fileID: 1133102672}
   - component: {fileID: 1133102671}
   - component: {fileID: 1133102674}
+  - component: {fileID: 1133102675}
   m_Layer: 5
   m_Name: CameraButton
   m_TagString: Untagged
@@ -4531,6 +4536,30 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1133102675}
+          m_TargetAssemblyTypeName: DoTweenEffects, Assembly-CSharp
+          m_MethodName: ButtonPhotoScale
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1133102675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133102669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02218aa18a027c4f88e4832ffc41083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1149122782
 GameObject:
   m_ObjectHideFlags: 0
@@ -4996,6 +5025,7 @@ GameObject:
   - component: {fileID: 1242500294}
   - component: {fileID: 1242500293}
   - component: {fileID: 1242500296}
+  - component: {fileID: 1242500297}
   m_Layer: 5
   m_Name: Answer question
   m_TagString: Untagged
@@ -5159,6 +5189,30 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1242500297}
+          m_TargetAssemblyTypeName: DoTweenEffects, Assembly-CSharp
+          m_MethodName: ButtonPhotoScale
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1242500297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242500290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02218aa18a027c4f88e4832ffc41083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1245803027 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4700647419099845782, guid: 2140222d2fa77c742a961620ec4b8ddf, type: 3}
@@ -5254,6 +5308,7 @@ GameObject:
   - component: {fileID: 1411918339}
   - component: {fileID: 1411918338}
   - component: {fileID: 1411918337}
+  - component: {fileID: 1411918340}
   m_Layer: 5
   m_Name: Morsa (3)
   m_TagString: Untagged
@@ -5311,6 +5366,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1411918340}
+          m_TargetAssemblyTypeName: DoTweenEffects, Assembly-CSharp
+          m_MethodName: ButtonPhotoScale
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1411918338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5349,6 +5416,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411918335}
   m_CullTransparentMesh: 1
+--- !u!114 &1411918340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411918335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02218aa18a027c4f88e4832ffc41083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1440278061
 GameObject:
   m_ObjectHideFlags: 0
@@ -5360,6 +5439,7 @@ GameObject:
   - component: {fileID: 1440278062}
   - component: {fileID: 1440278064}
   - component: {fileID: 1440278065}
+  - component: {fileID: 1440278066}
   m_Layer: 5
   m_Name: imagePreview
   m_TagString: Untagged
@@ -5425,6 +5505,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1440278066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440278061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02218aa18a027c4f88e4832ffc41083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1463262792 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8536812581196974080, guid: 6c3e16d5a5b82f443a32af13d0608b0d, type: 3}
@@ -5534,6 +5626,7 @@ GameObject:
   - component: {fileID: 1487207267}
   - component: {fileID: 1487207266}
   - component: {fileID: 1487207265}
+  - component: {fileID: 1487207268}
   m_Layer: 5
   m_Name: Morsa (2)
   m_TagString: Untagged
@@ -5591,6 +5684,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1487207268}
+          m_TargetAssemblyTypeName: DoTweenEffects, Assembly-CSharp
+          m_MethodName: ButtonPhotoScale
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1487207266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5629,6 +5734,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487207263}
   m_CullTransparentMesh: 1
+--- !u!114 &1487207268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487207263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02218aa18a027c4f88e4832ffc41083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1506844031
 GameObject:
   m_ObjectHideFlags: 0
@@ -7275,6 +7392,7 @@ GameObject:
   - component: {fileID: 1928432106}
   - component: {fileID: 1928432105}
   - component: {fileID: 1928432104}
+  - component: {fileID: 1928432107}
   m_Layer: 5
   m_Name: Morsa
   m_TagString: Untagged
@@ -7332,6 +7450,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1928432107}
+          m_TargetAssemblyTypeName: DoTweenEffects, Assembly-CSharp
+          m_MethodName: ButtonPhotoScale
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1928432105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7370,6 +7500,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1928432102}
   m_CullTransparentMesh: 1
+--- !u!114 &1928432107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928432102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02218aa18a027c4f88e4832ffc41083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1940615527 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 57aac7c350400c946bc62531faee7c08, type: 3}
@@ -7506,6 +7648,7 @@ GameObject:
   - component: {fileID: 2004364323}
   - component: {fileID: 2004364322}
   - component: {fileID: 2004364321}
+  - component: {fileID: 2004364324}
   m_Layer: 5
   m_Name: Morsa (1)
   m_TagString: Untagged
@@ -7563,6 +7706,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 2004364324}
+          m_TargetAssemblyTypeName: DoTweenEffects, Assembly-CSharp
+          m_MethodName: ButtonPhotoScale
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &2004364322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7601,6 +7756,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2004364319}
   m_CullTransparentMesh: 1
+--- !u!114 &2004364324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004364319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02218aa18a027c4f88e4832ffc41083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2021814145
 GameObject:
   m_ObjectHideFlags: 0
@@ -7614,6 +7781,7 @@ GameObject:
   - component: {fileID: 2021814148}
   - component: {fileID: 2021814147}
   - component: {fileID: 2021814150}
+  - component: {fileID: 2021814151}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -7674,6 +7842,18 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 2021814151}
+          m_TargetAssemblyTypeName: DoTweenEffects, Assembly-CSharp
+          m_MethodName: ButtonPhotoScale
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7764,6 +7944,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2021814151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021814145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02218aa18a027c4f88e4832ffc41083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2027208890 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3953970342314940649, guid: 2ea572d587ee60f44bd5baa3bc2d6503, type: 3}
@@ -7787,6 +7979,7 @@ GameObject:
   - component: {fileID: 2078526576}
   - component: {fileID: 2078526575}
   - component: {fileID: 2078526578}
+  - component: {fileID: 2078526579}
   m_Layer: 5
   m_Name: PhotoButton
   m_TagString: Untagged
@@ -7925,6 +8118,42 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1440278066}
+          m_TargetAssemblyTypeName: DoTweenEffects, Assembly-CSharp
+          m_MethodName: PicturePreviewWindow
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2078526579}
+          m_TargetAssemblyTypeName: DoTweenEffects, Assembly-CSharp
+          m_MethodName: ButtonPhotoScale
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &2078526579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078526573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02218aa18a027c4f88e4832ffc41083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2094451230
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8611,6 +8840,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 412221882591261205, guid: 2140222d2fa77c742a961620ec4b8ddf, type: 3}
+      propertyPath: m_TagString
+      value: Water
+      objectReference: {fileID: 0}
     - target: {fileID: 1958156606726692995, guid: 2140222d2fa77c742a961620ec4b8ddf, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -8618,6 +8851,10 @@ PrefabInstance:
     - target: {fileID: 2505675366782258693, guid: 2140222d2fa77c742a961620ec4b8ddf, type: 3}
       propertyPath: m_Layer
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2505675366782258693, guid: 2140222d2fa77c742a961620ec4b8ddf, type: 3}
+      propertyPath: m_TagString
+      value: Water
       objectReference: {fileID: 0}
     - target: {fileID: 4176782154211638655, guid: 2140222d2fa77c742a961620ec4b8ddf, type: 3}
       propertyPath: m_Materials.Array.data[0]
