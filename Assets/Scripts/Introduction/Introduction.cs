@@ -5,10 +5,12 @@ using DG.Tweening;
 
 public class Introduction : MonoBehaviour
 {
-    [SerializeField]
-    private SOIntroduction _stats;
+    public static Introduction instance;
+    public SOIntroduction _stats;
     private AudioSource _audioSource;
     private GameObject _home;
+    [SerializeField]
+    private GameObject UIgame;
     [SerializeField]
     [Range(0, 5)]
     private float _timeToGrowUp;
@@ -21,12 +23,13 @@ public class Introduction : MonoBehaviour
     #endregion
     void Start()
     {
+        instance = this;
         _audioSource= GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioSource>();
         
         _home = GameObject.FindGameObjectWithTag("Home");
         _home.transform.position = new Vector3(_home.transform.position.x, _home.transform.position.y - 10, _home.transform.position.z);
         GetValues();
-        StartCoroutine(StartIntroduction());
+        PlayAudio();
     }
     private void GetValues()
     {
@@ -36,14 +39,22 @@ public class Introduction : MonoBehaviour
         _homeTransform = _stats.HomeTransform;
         _timeToStart = _stats.TimeToStartGame;
     }
-    private IEnumerator StartIntroduction()
+    private void PlayAudio()
     {
-        GameObject Particles=Instantiate(_particles, _homeTransform.position, _homeTransform.rotation);
         _audioSource.clip = _introductionAudio;
         _audioSource.Play();
         _timeToStart = _introductionAudio.length;
+    }
+    public void PressStartGame()
+    {
+        StartCoroutine(StartIntroduction());
+    }
+    private IEnumerator StartIntroduction()
+    {
+        GameObject Particles=Instantiate(_particles, _homeTransform.position, _homeTransform.rotation);
         yield return new WaitForSeconds(_timeToStart);
         HomeAnimation();
+        UIgame.transform.DOScale(0, _timeToGrowUp);
         yield return new WaitForSeconds(_timeToGrowUp);
         ParticleSystem[] particles=Particles.GetComponentsInChildren<ParticleSystem>();
         for(int i=0; i < particles.Length; i++)
@@ -51,6 +62,7 @@ public class Introduction : MonoBehaviour
             particles[i].Stop();
         }
         Destroy(Particles, 5f);
+        Destroy(UIgame);
     }
     private void HomeAnimation()
     {
