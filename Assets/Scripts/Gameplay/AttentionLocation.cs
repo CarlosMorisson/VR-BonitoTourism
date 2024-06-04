@@ -20,6 +20,7 @@ public class AttentionLocation : MonoBehaviour
         Vector3 direction = _playerPos.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+        //GetLocation();
     }
     private void GetLocation()
     {

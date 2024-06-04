@@ -15,5 +15,10 @@ MonoBehaviour:
   HomeTransform: {fileID: 8842030030582596352, guid: 2140222d2fa77c742a961620ec4b8ddf, type: 3}
   DustParticle: {fileID: 1597063089304374802, guid: 02facf78f24bab24289388f5d6ae434f, type: 3}
   IntroductionAudio: {fileID: 8300000, guid: 9afebb84df5fa494592974bacf49ca0a, type: 3}
-  arrowLocals: []
+  arrowLocals:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   TimeToStartGame: 5

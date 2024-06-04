@@ -6,6 +6,7 @@ using UnityEngine;
 public class SOGameController : ScriptableObject
 {
     public string Answer;
+    public string[] AnswerAlternatives;
     public List<QuizQuestion> questions;
 
 }

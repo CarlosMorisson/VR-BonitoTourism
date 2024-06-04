@@ -12,5 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3a2e2258607b44dafd8888f5cddb20, type: 3}
   m_Name: New SO Game Controller
   m_EditorClassIdentifier: 
-  Answer: 
-  questions: []
+  Answer: Morsa
+  AnswerAlternatives:
+  - Genislon
+  - Gelson
+  - Denilson
+  - Agenor
+  - Eder
+  - Ricardo
+  - Walter
+  - Corilo
+  questions:
+  - questionText: 
+  - questionText: 
+  - questionText: 
+  - questionText: 
+  - questionText: 
+  - questionText: 
+  - questionText: 
+  - questionText: 
