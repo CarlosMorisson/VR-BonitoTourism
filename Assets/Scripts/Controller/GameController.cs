@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     public SOGameController stats;
     [SerializeField]
-    private AudioClip feedbackPositivo, feedbackNegativo;
+    private AudioClip positiveFeedback, negativeFeedback, takePhotoFirst;
     private AudioSource _audioSource;
     [SerializeField]
     private string[] _questionList= new string[5];
@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         instance = this;
-        
+        _audioSource = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioSource>();
         GetAwnser();
         GetQuestions();
         RandomizeQuestions();
@@ -86,22 +86,29 @@ public class GameController : MonoBehaviour
     }
     public void SendAnwser()
     {
-        if(_answer== _playerAnwser)
+        if (TakePhoto.instance.checkCollision)
         {
-            UIController.instance.WinOrLoseCanva(true);
-            _audioSource = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioSource>();
-            _audioSource.clip = feedbackPositivo;
-            _audioSource.Play();
-            StartCoroutine(EndGame());
+            if (_answer == _playerAnwser)
+            {
+                UIController.instance.WinOrLoseCanva(true);
+                _audioSource.clip = positiveFeedback;
+                _audioSource.Play();
+                StartCoroutine(EndGame());
+            }
+            else
+            {
+                UIController.instance.WinOrLoseCanva(false);
+                _audioSource.clip = negativeFeedback;
+                _audioSource.Play();
+                StartCoroutine(EndGame());
+            }
         }
         else
         {
-            UIController.instance.WinOrLoseCanva(false);
-            _audioSource = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioSource>();
-            _audioSource.clip = feedbackNegativo;
+            _audioSource.clip = takePhotoFirst;
             _audioSource.Play();
-            StartCoroutine(EndGame());
         }
+        
     }
     #endregion
 }

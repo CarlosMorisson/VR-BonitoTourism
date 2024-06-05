@@ -10,6 +10,8 @@ public class NewXROrigin : MonoBehaviour
     public Transform head;
     public Transform leftHand;
     public Transform rightHand;
+    [SerializeField]
+    private Transform playerModel;
     //
     private Transform headRig;
     private Transform leftRig;
@@ -21,25 +23,33 @@ public class NewXROrigin : MonoBehaviour
         headRig = xrOrigin.transform.Find("Camera Offset/Main Camera");
         leftRig = xrOrigin.transform.Find("Camera Offset/LeftHand Controller");
         rightRig = xrOrigin.transform.Find("Camera Offset/RightHand Controller");
-
+/*
         foreach(var item in GetComponentsInChildren<Renderer>())
         {
             item.enabled = false;
         }
-
+*/
     }
     
     // Update is called once per frame
     void Update()
     {
+        Quaternion headRotation = head.rotation;
 
+        Quaternion newRotation = Quaternion.Euler(playerModel.eulerAngles.x, headRotation.eulerAngles.y, playerModel.eulerAngles.z);
+
+        playerModel.rotation = newRotation;
+        playerModel.position = new Vector3(head.transform.position.x, head.transform.position.y-0.8f, head.transform.position.z);
+        #region Coments
+        /*
          rightHand.gameObject.SetActive(false);
          leftHand.gameObject.SetActive(false);
          head.gameObject.SetActive(false);
 
          MapPosition(head, headRig);
          MapPosition(leftHand, leftRig);
-         MapPosition(rightHand, rightRig);
+         MapPosition(rightHand, rightRig);*/
+        #endregion
 
     }
     void MapPosition(Transform target, Transform rigTransform)

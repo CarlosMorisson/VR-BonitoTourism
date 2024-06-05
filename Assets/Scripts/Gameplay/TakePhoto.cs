@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TakePhoto : MonoBehaviour
 {
+    public static TakePhoto instance;
+    #region TakePhoto Settings
     [Header("TakePhoto Settings")]
     [SerializeField]
     private Camera captureCamera; // Referência para a câmera que captura a screenshot
@@ -11,15 +13,26 @@ public class TakePhoto : MonoBehaviour
     private Image picture;
     [SerializeField]
     private Image secondPicture;
+    #endregion
+    #region Check Collider
     [Header("CheckCollider")]
     [Range(0,5)]
     [SerializeField]
-    public float radius = 1.0f; 
+    public float radius = 1.0f;
+    public bool checkCollision=false;
     public LayerMask layerMask; 
     private RenderTexture _renderTexture;
     private Texture2D _textureForPicture;
+    #endregion
+    #region AudioSettings
+    private AudioSource _audioSource;
+    [SerializeField]
+    private AudioClip nearFraud, farFraud;
+    #endregion
     void Start()
     {
+        instance = this;
+        _audioSource = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioSource>();
         _renderTexture = new RenderTexture(captureCamera.pixelWidth, captureCamera.pixelHeight, 24);
     }
     #region CapturePicture
@@ -39,35 +52,42 @@ public class TakePhoto : MonoBehaviour
         picture.material.mainTexture = _textureForPicture;
         secondPicture.sprite = sprite;
     }
-
+    public void TakePic()
+    {
+        
+        CheckColliders();
+        CaptureScreenshotAndConvert();
+        PlayAudioFeedback();
+    }
+    private void PlayAudioFeedback()
+    {
+        if (checkCollision)
+        {
+            _audioSource.clip = nearFraud;
+            _audioSource.Play();
+        }
+        else
+        {
+            _audioSource.clip = farFraud;
+            _audioSource.Play();
+        }
+    }
     #endregion
     #region CheckColliders
     private void CheckColliders()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius, layerMask);
         
-        // Itera sobre os colisores encontrados
         foreach (Collider collider in colliders)
         {
-            Debug.Log("entrou");
             if (collider.CompareTag("Water"))
             {
-                // Faça algo quando colidir com um objeto que tenha a tag "Water"
-                Debug.Log("Collision with Water object detected!");
-            }
-            else
-            {
-                Debug.Log(collider.gameObject.tag);
-                Debug.Log(collider.gameObject.name);
+                checkCollision = true;
             }
         }
     }
     #endregion
-    public void TakePic()
-    {
-        CaptureScreenshotAndConvert();
-        CheckColliders();
-    }
+    
     public void Update()
     {
         picture.material.mainTexture = _textureForPicture;

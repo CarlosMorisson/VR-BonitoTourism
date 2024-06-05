@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class AttentionLocation : MonoBehaviour
 {
@@ -10,8 +11,10 @@ public class AttentionLocation : MonoBehaviour
     private int _indexPos;
     void Start()
     {
+        //transform.DO(new Vector3(transform.localScale.y+0.1f, transform.localScale.y + 0.1f, transform.localScale.y+0.1f), 1000);
         _positionList = Introduction.instance._stats.arrowLocals;
         transform.position = _positionList[0].position;
+       
     }
 
     // Update is called once per frame
@@ -19,7 +22,7 @@ public class AttentionLocation : MonoBehaviour
     {
         Vector3 direction = _playerPos.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+        transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, -90);
         //GetLocation();
     }
     private void GetLocation()

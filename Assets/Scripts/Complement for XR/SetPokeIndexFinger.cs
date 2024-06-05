@@ -12,6 +12,7 @@ public class SetPokeIndexFinger : MonoBehaviour
     private GameObject Circle;
     void OnEnable()
     {
+        Debug.Log(transform.parent.parent.gameObject.name);
         xrPokeInteractor = transform.parent.parent.GetComponentInChildren<XRPokeInteractor>();
         
         SetPokePoint();
