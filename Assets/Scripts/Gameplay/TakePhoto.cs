@@ -29,6 +29,11 @@ public class TakePhoto : MonoBehaviour
     [SerializeField]
     private AudioClip nearFraud, farFraud;
     #endregion
+    #region CheckDistance
+    [Header("CheckDistance")]
+    [SerializeField]
+    Transform pocketTransform, playerTransform;
+    #endregion
     void Start()
     {
         instance = this;
@@ -49,7 +54,7 @@ public class TakePhoto : MonoBehaviour
         captureCamera.targetTexture = currentRT;
         RenderTexture.active = null;
         Sprite sprite = Sprite.Create(_textureForPicture, new Rect(0, 0, _textureForPicture.width, _textureForPicture.height), Vector2.zero);
-        picture.material.mainTexture = _textureForPicture;
+        picture.sprite = sprite;
         secondPicture.sprite = sprite;
     }
     public void TakePic()
@@ -87,10 +92,19 @@ public class TakePhoto : MonoBehaviour
         }
     }
     #endregion
-    
+    #region CheckDistance
+    private void CheckDistanceToPlayer()
+    {
+        float distance = Vector3.Distance(playerTransform.position, this.transform.position);
+        if (distance > 1)
+        {
+            transform.position = pocketTransform.position;
+        }
+    }
+    #endregion
     public void Update()
     {
-        picture.material.mainTexture = _textureForPicture;
+        CheckDistanceToPlayer();
     }
     void OnDrawGizmosSelected()
     {

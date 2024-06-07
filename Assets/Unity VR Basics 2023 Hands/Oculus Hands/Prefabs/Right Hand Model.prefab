@@ -1091,6 +1091,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IndexFinger: {fileID: 5686134208185136552}
   xrPokeInteractor: {fileID: 0}
+  differentHand: 1
   Circle: {fileID: 4430543092600581339}
 --- !u!1 &5686134208185362932
 GameObject:

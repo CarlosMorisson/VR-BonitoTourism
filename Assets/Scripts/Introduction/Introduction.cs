@@ -10,7 +10,10 @@ public class Introduction : MonoBehaviour
     private AudioSource _audioSource;
     private GameObject _home;
     [SerializeField]
-    private GameObject UIgame;
+    private GameObject UIgame, InteractablesObjects;
+    
+    [SerializeField]
+    private Transform playerInitialPos, Player;
     [SerializeField]
     [Range(0, 5)]
     private float _timeToGrowUp;
@@ -24,6 +27,7 @@ public class Introduction : MonoBehaviour
     void Start()
     {
         instance = this;
+        Player.position = playerInitialPos.position;
         _audioSource= GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioSource>();
         
         _home = GameObject.FindGameObjectWithTag("Home");
@@ -63,6 +67,7 @@ public class Introduction : MonoBehaviour
         }
         Destroy(Particles, 5f);
         Destroy(UIgame);
+        InteractablesObjects.SetActive(true);
     }
     private void HomeAnimation()
     {

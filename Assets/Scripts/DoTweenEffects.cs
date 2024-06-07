@@ -9,7 +9,7 @@ public class DoTweenEffects : MonoBehaviour
         transform.DOScale(new Vector3(5f, 5f, 5f), 0);
         transform.DOLocalMove(new Vector3(0.06f, -0.05f, -1.4f), 0);
         transform.DOScale(new Vector3(1f, 1f, 1f), 1);
-        transform.DOLocalMove(new Vector3(1.77f, -2.51f, -1.4f), 1);
+        transform.DOLocalMove(new Vector3(1.77f, -3.58f, -1.4f), 1);
     }
     public void ButtonPhotoScale()
     {

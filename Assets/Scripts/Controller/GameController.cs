@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
     private AudioClip positiveFeedback, negativeFeedback, takePhotoFirst;
     private AudioSource _audioSource;
     [SerializeField]
-    private string[] _questionList= new string[5];
+    private string[] _questionList= new string[6];
     private GameObject[] _textQuestion;
     [HideInInspector]
     public string _playerAnwser;
@@ -35,6 +35,7 @@ public class GameController : MonoBehaviour
     private void GetQuestions()
     {
         _textQuestion = GameObject.FindGameObjectsWithTag("Question");
+        Debug.Log(_textQuestion[0].gameObject.name) ;
         for(int i = 0; i < _textQuestion.Length; i++)
         {
             _questionList[i] = _textQuestion[i].GetComponentInChildren<TextMeshProUGUI>().text;

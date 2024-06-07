@@ -8,13 +8,28 @@ public class SetPokeIndexFinger : MonoBehaviour
     public Transform IndexFinger;
     [SerializeField]
     private XRPokeInteractor xrPokeInteractor;
+    public enum DifferentHands
+    {
+        MeshHand,
+        ControlHand
+    };
+    public DifferentHands differentHand;
     [SerializeField]
     private GameObject Circle;
     void OnEnable()
     {
-        Debug.Log(transform.parent.parent.gameObject.name);
-        xrPokeInteractor = transform.parent.parent.GetComponentInChildren<XRPokeInteractor>();
         
+
+        switch (differentHand)
+        {
+            case (DifferentHands.ControlHand):
+                xrPokeInteractor = transform.parent.parent.GetComponentInChildren<XRPokeInteractor>();
+                break;
+            case (DifferentHands.MeshHand):
+                Debug.Log(transform.GetChild(2).GetChild(1).gameObject.name);
+                xrPokeInteractor = transform.GetChild(2).GetChild(1).GetComponentInChildren<XRPokeInteractor>();
+                break;
+        }
         SetPokePoint();
     }
     public void SetPokePoint()
