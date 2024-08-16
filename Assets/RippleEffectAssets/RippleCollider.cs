@@ -6,6 +6,13 @@ public class RippleCollider : MonoBehaviour
 {
     public ParticleSystem ripple;
     private bool inWater;
+    public enum BodyType {
+        LeftHad,
+        RightHand,
+        None
+    };
+    public BodyType bodyType;
+
     // Start is called before the first frame update yup
     void Start()
     {
@@ -23,16 +30,27 @@ public class RippleCollider : MonoBehaviour
     {
         if (other.gameObject.layer == 4)
         {
-            Debug.Log("Colidiu");
             ripple.Emit(transform.position, Vector3.zero, 5, 0.1f, Color.white);
-        }
+        }        
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.layer == 4)
         {
-            Debug.Log("Colidiu");
             ripple.Emit(transform.position, Vector3.zero, 5, 0.1f, Color.white);
         }
+        if (other.gameObject.CompareTag("Swim"))
+        {
+            switch (bodyType)
+            {
+                case BodyType.LeftHad:
+                    Swimmer.instance.goForward = true;
+                    break;
+                case BodyType.RightHand:
+
+                    break;
+            }
+        }
+
     }
 }

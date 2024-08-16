@@ -12,6 +12,7 @@ TagManager:
   - Door
   - Water
   - Question
+  - Swim
   layers:
   - Default
   - TransparentFX
