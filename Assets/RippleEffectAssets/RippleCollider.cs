@@ -44,7 +44,8 @@ public class RippleCollider : MonoBehaviour
             switch (bodyType)
             {
                 case BodyType.LeftHad:
-                    Swimmer.instance.goForward = true;
+                    if(Swimmer.instance.stopSwimm==false)
+                        Swimmer.instance.goForward = true;
                     break;
                 case BodyType.RightHand:
 

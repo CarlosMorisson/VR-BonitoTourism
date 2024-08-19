@@ -6,43 +6,32 @@ using TMPro;
 public class UIController : MonoBehaviour
 {
     public static UIController instance;
+    [Header("Hud")]
     [SerializeField]
-    private GameObject Questions;
+    GameObject HudPlayer;
     [SerializeField]
-    private GameObject Feedback;
+    private TextMeshProUGUI FishScore;
     [SerializeField]
-    private TextMeshProUGUI _textGiveAnwser, _textRightAnwser;
-    
-    void Start()
+    private TextMeshProUGUI CronometerText;
+    [Header("GameOver")]
+    [SerializeField]
+    GameObject GameOver;
+    [SerializeField]
+    private TextMeshProUGUI FishScoreGameOver;
+    private void Start()
     {
         instance = this;
-        StartCoroutine(closeQuestions());
-        
     }
-    public void WinOrLoseCanva(bool win)
+    public void UpdateCronometer(float time)
     {
-        Feedback.SetActive(true);
-        _textGiveAnwser.text = "Resposta Dada: " + GameController.instance._playerAnwser;
-        _textRightAnwser.text = "Resposta Correta: " + GameController.instance.stats.Answer;
-        if (win)
-        {
-            _textGiveAnwser.color = Color.green;
-            _textRightAnwser.color = Color.green;
-        }
-        else
-        {
-            _textGiveAnwser.color = Color.red;
-            _textRightAnwser.color = Color.red;
-        }
+        int minutes = Mathf.FloorToInt(time / 60);
+        int seconds = Mathf.FloorToInt(time % 60);
+        CronometerText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
     }
-    private IEnumerator closeQuestions()
+    public void SetGameOverCanva(int points)
     {
-        yield return new WaitForSeconds(2f);
-        Questions.SetActive(false);
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
+        HudPlayer.SetActive(false);
+        GameOver.SetActive(true);
+        FishScoreGameOver.text = points.ToString();
     }
 }

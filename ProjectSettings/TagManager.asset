@@ -13,6 +13,7 @@ TagManager:
   - Water
   - Question
   - Swim
+  - StopSwim
   layers:
   - Default
   - TransparentFX
