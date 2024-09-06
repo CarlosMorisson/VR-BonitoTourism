@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 public class UIController : MonoBehaviour
 {
     public static UIController instance;
@@ -18,6 +19,12 @@ public class UIController : MonoBehaviour
     GameObject GameOver;
     [SerializeField]
     private TextMeshProUGUI FishScoreGameOver;
+    [Header("PauseGame")]
+    [SerializeField]
+    GameObject Pause;
+    int NumOfContacts;
+    bool _paused;
+
     private void Start()
     {
         instance = this;
@@ -32,6 +39,33 @@ public class UIController : MonoBehaviour
     {
         HudPlayer.SetActive(false);
         GameOver.SetActive(true);
-        FishScoreGameOver.text = points.ToString();
+        GameOver.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 5);
+;        FishScoreGameOver.text = points.ToString();
+    }
+    public void GamePauseCanva()
+    {
+        Pause.SetActive(true);
+        HudPlayer.SetActive(false);
+    }
+    public void SetFishScore(int points)
+    {
+        FishScore.text = points.ToString();
+    }
+    public void IncrementPokeToPause()
+    {
+        NumOfContacts++;
+        Debug.Log("Entrou");
+        if (NumOfContacts >= 3)
+        {
+            _paused = true;
+        }
+        StartCoroutine(DiscardNumOfContacts());
+    }
+    IEnumerator DiscardNumOfContacts()
+    {
+        yield return new WaitForSeconds(6f);
+        if (!_paused)
+            NumOfContacts = 0;
+
     }
 }

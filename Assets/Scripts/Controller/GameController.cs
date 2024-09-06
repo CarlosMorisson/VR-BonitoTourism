@@ -8,7 +8,8 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
-    private float _cronometer=3;
+    [SerializeField]
+    private float _cronometer=2;
     private int _points;
     [SerializeField]
     GameObject GameOverCanva;
@@ -20,25 +21,45 @@ public class GameController : MonoBehaviour
     AudioSource audioSource;
     [SerializeField]
     AudioClip startAudio, endAudio;
+    bool finished = false;
+    bool started = false;
     private void Start()
     {
+        instance = this;
         audioSource.clip = startAudio;
         audioSource.Play();
     }
     private void Update()
     {
         _player = GameObject.FindGameObjectWithTag("Player").transform;
-        _cronometer -= Time.deltaTime;
+        if(started)
+            _cronometer -= Time.deltaTime;
         UIController.instance.UpdateCronometer(_cronometer);
-        if (_cronometer < 0f)
+        if (_cronometer < 0f && !finished)
             EndGame();
+
     } 
+    public void NewGame()
+    {
+        started = true;
+    }
     private void EndGame()
     {
-        UIController.instance.SetGameOverCanva(_points);
+
         _player.transform.DOMove(InitialPos.position, 2f);
+        UIController.instance.SetGameOverCanva(_points);
         audioSource.clip = endAudio;
         audioSource.Play();
+        finished=true;
     }
-
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("SampleScene 1");
+    }
+    public void GetPoints()
+    {
+        Debug.Log(_points);
+        _points++;
+        UIController.instance.SetFishScore(_points);
+    }
 }

@@ -16,6 +16,9 @@ public class SetPokeIndexFinger : MonoBehaviour
     public DifferentHands differentHand;
     [SerializeField]
     private GameObject Circle;
+    [SerializeField]
+    int NumOfContacts;
+    bool _paused;
     void OnEnable()
     {
         
@@ -34,7 +37,6 @@ public class SetPokeIndexFinger : MonoBehaviour
     }
     public void SetPokePoint()
     {
-
         xrPokeInteractor.attachTransform = IndexFinger;
         Circle.transform.localScale = new Vector3(xrPokeInteractor.pokeSelectWidth, xrPokeInteractor.pokeSelectWidth, xrPokeInteractor.pokeSelectWidth);
     }
