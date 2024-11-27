@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class FishAI : MonoBehaviour
 {
     public BoxCollider boxCollider;  // Referência ao Box Collider
@@ -31,6 +31,8 @@ public class FishAI : MonoBehaviour
         moveSpeed = Random.RandomRange(minSpeed, maxSpeed);
         float randomScale = Random.RandomRange(1f, 3f);
         transform.localScale = new Vector3(randomScale, randomScale, randomScale);
+        transform.DOScaleZ(1.2f, 2f).SetLoops(-1, LoopType.Yoyo);
+        transform.DOScaleY(1.1f, 5f).SetLoops(-1, LoopType.Yoyo);
         // Define o ponto inicial de movimento
         SetRandomTargetPosition();
     }

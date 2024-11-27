@@ -9,7 +9,7 @@ public class UIController : MonoBehaviour
     public static UIController instance;
     [Header("Hud")]
     [SerializeField]
-    GameObject HudPlayer;
+    public GameObject HudPlayer;
     [SerializeField]
     private TextMeshProUGUI FishScore;
     [SerializeField]
@@ -27,6 +27,7 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 0;
         instance = this;
     }
     public void UpdateCronometer(float time)
@@ -41,23 +42,32 @@ public class UIController : MonoBehaviour
         GameOver.SetActive(true);
         GameOver.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 5);
 ;        FishScoreGameOver.text = points.ToString();
+        Time.timeScale = 0;
     }
     public void GamePauseCanva()
     {
         Pause.SetActive(true);
         HudPlayer.SetActive(false);
+        Time.timeScale = 0;
     }
     public void SetFishScore(int points)
     {
         FishScore.text = points.ToString();
     }
+    public void ReturnFromPause()
+    {
+        NumOfContacts = 0;
+        _paused = false;
+        Time.timeScale = 1;
+    }
     public void IncrementPokeToPause()
     {
         NumOfContacts++;
-        Debug.Log("Entrou");
-        if (NumOfContacts >= 3)
+       
+        if (NumOfContacts >= 5)
         {
             _paused = true;
+            GamePauseCanva();
         }
         StartCoroutine(DiscardNumOfContacts());
     }

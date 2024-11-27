@@ -838,6 +838,8 @@ MonoBehaviour:
   dragForce: 1
   minForce: 0
   minTimeBetweenStrokes: 1
+  buoyancyForce: 5
+  floatThreshold: 0.1
   isUnderWater: 0
   playerCamera: {fileID: 3963303502670168631}
   trackingReference: {fileID: 6745396420228591289}

@@ -42,6 +42,8 @@ public class GameController : MonoBehaviour
     public void NewGame()
     {
         started = true;
+        Time.timeScale = 1;
+        UIController.instance.HudPlayer.SetActive(true);
     }
     private void EndGame()
     {

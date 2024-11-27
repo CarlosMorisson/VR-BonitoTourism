@@ -14,6 +14,7 @@ TagManager:
   - Question
   - Swim
   - StopSwim
+  - Hand
   layers:
   - Default
   - TransparentFX
