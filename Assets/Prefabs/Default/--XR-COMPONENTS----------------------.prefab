@@ -107,7 +107,7 @@ Transform:
   - {fileID: 349640107252381192}
   - {fileID: 4416544367590079881}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &978779717703133744
 GameObject:
@@ -198,6 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ripple: {fileID: 0}
   bodyType: 2
+  _particleSystem: []
 --- !u!1 &1004532754108295589
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +311,6 @@ GameObject:
   - component: {fileID: 1069935215740337849}
   - component: {fileID: 6434295159849651276}
   - component: {fileID: 4730831931520033768}
-  - component: {fileID: 2464237642592087026}
   m_Layer: 0
   m_Name: SwimCollider
   m_TagString: Swim
@@ -431,18 +431,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2464237642592087026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2189839261558194035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e813ae75d4654d4a85ab842ebce85b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2254601761535788891
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +637,6 @@ GameObject:
   - component: {fileID: 2236619707783610215}
   - component: {fileID: 5170234681576435693}
   - component: {fileID: 2996800710421057873}
-  - component: {fileID: 730723925620322535}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -822,38 +809,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
---- !u!114 &730723925620322535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2468724716293098508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 870edce637e0da748bc1162dc03cca53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swimForce: 50
-  dragForce: 1
-  minForce: 0
-  minTimeBetweenStrokes: 1
-  buoyancyForce: 5
-  floatThreshold: 0.1
-  isUnderWater: 0
-  playerCamera: {fileID: 3963303502670168631}
-  trackingReference: {fileID: 6745396420228591289}
-  goForward: 0
-  stopSwimm: 0
-  AudioSourcePlayer: {fileID: 0}
-  AudioDive:
-  - {fileID: 8300000, guid: c9f019b93e8654f44a8b7e85838452ec, type: 3}
-  - {fileID: 8300000, guid: 098b6cc89cb04244b9058c2843bd6e54, type: 3}
-  - {fileID: 8300000, guid: 0e4e76514d4d9054d849740914e00ba8, type: 3}
-  - {fileID: 8300000, guid: cf8b3d08fe106fb4a8e7767aab9ab021, type: 3}
-  - {fileID: 8300000, guid: 4969c280dca393743a32d6c89f137060, type: 3}
-  - {fileID: 8300000, guid: 928c00bdda3c29348b2a5e05e87c71b7, type: 3}
-  - {fileID: 8300000, guid: 96a45d71923b4944f93af4b7c3437623, type: 3}
 --- !u!1 &2653003044766883840
 GameObject:
   m_ObjectHideFlags: 0
@@ -2999,6 +2954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ripple: {fileID: 0}
   bodyType: 0
+  _particleSystem: []
 --- !u!1 &8164997222986166768
 GameObject:
   m_ObjectHideFlags: 0
@@ -3449,6 +3405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ripple: {fileID: 0}
   bodyType: 0
+  _particleSystem: []
 --- !u!1 &8849797120262665377
 GameObject:
   m_ObjectHideFlags: 0
@@ -3817,6 +3774,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ripple: {fileID: 0}
   bodyType: 0
+  _particleSystem: []
 --- !u!54 &4959696602214922715
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3947,6 +3905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ripple: {fileID: 0}
   bodyType: 0
+  _particleSystem: []
 --- !u!54 &6994035033770771226
 Rigidbody:
   m_ObjectHideFlags: 0

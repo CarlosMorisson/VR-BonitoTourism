@@ -121,8 +121,8 @@ Material:
     - _Wind_Power: 0.05
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 0.4716981, b: 0.032854643, a: 1}
-    - _Color_Tint: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.43688422, g: 0.10234961, b: 0.9433962, a: 1}
+    - _Color_Tint: {r: 0.9811321, g: 0, b: 0.38991678, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
     - _Wind_Direction: {r: 1, g: 1, b: 1, a: 0}

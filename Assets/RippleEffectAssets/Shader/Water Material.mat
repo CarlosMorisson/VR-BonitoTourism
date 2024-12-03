@@ -106,10 +106,10 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - Color_2e1b98459f464ea7b1383c9594fd91d0: {r: 0, g: 1, b: 0.8591268, a: 0}
-    - Color_785d28f280074f10b0a03ab445e73eb8: {r: 0.23529412, g: 0.6117647, b: 0.6005807, a: 0}
+    - Color_2e1b98459f464ea7b1383c9594fd91d0: {r: 0, g: 1, b: 0.7897272, a: 0}
+    - Color_785d28f280074f10b0a03ab445e73eb8: {r: 0.5188679, g: 0.31013057, b: 0.21293165, a: 0}
     - Color_84890f286f174ba8839cd3f7b455d5d3: {r: 1, g: 1, b: 1, a: 0}
-    - Color_d925d3df582c44fb8fb4a7e86c5840e4: {r: 0, g: 0.5627556, b: 1, a: 0}
+    - Color_d925d3df582c44fb8fb4a7e86c5840e4: {r: 1, g: 0.5896226, b: 0.9821451, a: 0}
     - Vector2_0e3efbaa64e544b9ba62858a284713b6: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_1b3bf3e86673452d81551df6f152c93e: {r: 0.1, g: 0.1, b: 0, a: 0}
     - Vector2_c7a73c4a650a402a8aba0e93b533ead3: {r: 4, g: 4, b: 0, a: 0}

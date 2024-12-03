@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
         instance = this;
         audioSource.clip = startAudio;
         audioSource.Play();
+        NewGame();
     }
     private void Update()
     {
