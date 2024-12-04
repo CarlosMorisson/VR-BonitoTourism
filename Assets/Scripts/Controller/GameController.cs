@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player").transform;
         if(started)
             _cronometer -= Time.deltaTime;
-        UIController.instance.UpdateCronometer(_cronometer);
+
         if (_cronometer < 0f && !finished)
             EndGame();
 
@@ -44,13 +44,13 @@ public class GameController : MonoBehaviour
     {
         started = true;
         Time.timeScale = 1;
-        UIController.instance.HudPlayer.SetActive(true);
+ 
     }
     private void EndGame()
     {
 
         _player.transform.DOMove(InitialPos.position, 2f);
-        UIController.instance.SetGameOverCanva(_points);
+
         audioSource.clip = endAudio;
         audioSource.Play();
         finished=true;
@@ -63,6 +63,6 @@ public class GameController : MonoBehaviour
     {
         Debug.Log(_points);
         _points++;
-        UIController.instance.SetFishScore(_points);
+        
     }
 }

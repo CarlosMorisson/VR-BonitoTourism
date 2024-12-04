@@ -68,7 +68,7 @@ public class RippleCollider : MonoBehaviour
 
         if (other.gameObject.CompareTag("Hand"))
         {
-            UIController.instance.IncrementPokeToPause();
+            
         }
     }
 }
