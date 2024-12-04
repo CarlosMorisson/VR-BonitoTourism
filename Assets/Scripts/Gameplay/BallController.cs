@@ -5,6 +5,7 @@ using System;
 
 public class BallController : MonoBehaviour
 {
+    [Header("Ball Values")]
     public float baseSpeed = 10f;        // Velocidade base da bola
     public float gravity = 9.8f;         // Intensidade da gravidade
     public float bounceForce = 5f;       // Força do quique no chão
@@ -14,7 +15,9 @@ public class BallController : MonoBehaviour
     public float racketSpeedInfluence = 0.5f; // Fator de influência da velocidade da raquete
 
     private Vector3 velocity;            // Velocidade atual da bola
-    private bool isActive = false;       // Define se a bola está ativa
+    private bool isActive = false;  
+    // Define se a bola está ativa
+    [Header ("Enemy ball")]
     [SerializeField]
     private Transform[] enemyDestiny;
     private Dictionary<(int, int), Action> _actionMap;
@@ -25,6 +28,9 @@ public class BallController : MonoBehaviour
         Player
     };
     public BallType ballType;
+    [Header("Effects")]
+    [SerializeField]
+    private ParticleSystem waterSplash, groundSplash, racketSplash;
     private void Start()
     {
         // Inicializa a bola como inativa
@@ -51,6 +57,7 @@ public class BallController : MonoBehaviour
             {
                 velocity.y = bounceForce;
             }
+            groundSplash.Play();
         }
 
         // Detecção da raquete
@@ -64,12 +71,15 @@ public class BallController : MonoBehaviour
                 float racketSpeed = racket.racketSpeed; // Velocidade da raquete
                 Launch(racketDirection, racketSpeed);
             }
-
+            racketSplash.Play();
             // Desativa a bola atual
             isActive = false;
             gameObject.SetActive(false);
         }
-
+        else if (other.gameObject.layer == 4)
+        {
+            waterSplash.Play();
+        }
         // Detecção de fora da quadra
         else if (((1 << other.gameObject.layer) & courtBoundsLayer) != 0)
         {

@@ -6,7 +6,9 @@ using System.Linq;
 
 public class LoopNPCController : MonoBehaviour
 {
+    [SerializeField]
     private Transform _npcParent;
+    [SerializeField]
     private Transform[] _allNpc;
     private int _randomSpeed;
     void Start()
