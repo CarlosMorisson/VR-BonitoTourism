@@ -5,11 +5,16 @@ using UnityEngine;
 public class RippleCollider : MonoBehaviour
 {
     public ParticleSystem ripple;
+    [SerializeField]
+    private float bodyCount;
     private bool inWater;
+    [SerializeField]
+    private float _count;
     public enum BodyType {
         LeftHad,
         RightHand,
         Bark,
+        Body,
         None
     };
     public BodyType bodyType;
@@ -18,15 +23,26 @@ public class RippleCollider : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
+        Debug.Log(gameObject.name);
     }
 
     // Update is called once per frame
     void Update()
     {
+
         ripple.transform.position = transform.position;
         Shader.SetGlobalVector("_Player", transform.position);
         if (BodyType.Bark == bodyType)
             ripple.Emit(transform.position, Vector3.zero, 5, 0.1f, Color.white);
+        else if (BodyType.Body == bodyType)
+        {
+            _count += Time.deltaTime;
+            if (_count > bodyCount)
+            {
+                ripple.Emit(transform.position, Vector3.zero, 5, 0.1f, Color.white);
+                _count = 0;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)

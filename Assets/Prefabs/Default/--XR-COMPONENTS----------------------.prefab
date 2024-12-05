@@ -197,6 +197,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ripple: {fileID: 0}
+  bodyCount: 0
+  _count: 0
   bodyType: 2
   _particleSystem: []
 --- !u!1 &1004532754108295589
@@ -2953,6 +2955,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ripple: {fileID: 0}
+  bodyCount: 0
+  _count: 0
   bodyType: 0
   _particleSystem: []
 --- !u!1 &8164997222986166768
@@ -3404,6 +3408,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ripple: {fileID: 0}
+  bodyCount: 0
+  _count: 0
   bodyType: 0
   _particleSystem: []
 --- !u!1 &8849797120262665377
@@ -3773,6 +3779,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ripple: {fileID: 0}
+  bodyCount: 0
+  _count: 0
   bodyType: 0
   _particleSystem: []
 --- !u!54 &4959696602214922715
@@ -3904,6 +3912,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ripple: {fileID: 0}
+  bodyCount: 0
+  _count: 0
   bodyType: 0
   _particleSystem: []
 --- !u!54 &6994035033770771226

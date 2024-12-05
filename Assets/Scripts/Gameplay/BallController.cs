@@ -7,15 +7,14 @@ public class BallController : MonoBehaviour
 {
     [Header("Ball Values")]
     public float baseSpeed = 10f;        // Velocidade base da bola
-    public float gravity = 9.8f;         // Intensidade da gravidade
+    public const float GRAVITY = 9.8f;         // Intensidade da gravidade
     public float bounceForce = 5f;       // Força do quique no chão
     public LayerMask groundLayer;        // Camada do chão
     public LayerMask racketLayer;        // Camada da raquete
     public LayerMask courtBoundsLayer;   // Camada que delimita a quadra
     public float racketSpeedInfluence = 0.5f; // Fator de influência da velocidade da raquete
 
-    private Vector3 velocity;            // Velocidade atual da bola
-    private bool isActive = false;  
+    public Vector3 velocity;            // Velocidade atual da bola
     // Define se a bola está ativa
     [Header ("Enemy ball")]
     [SerializeField]
@@ -28,21 +27,18 @@ public class BallController : MonoBehaviour
         Player
     };
     public BallType ballType;
-    [Header("Effects")]
-    [SerializeField]
-    private ParticleSystem waterSplash, groundSplash, racketSplash;
     private void Start()
     {
         // Inicializa a bola como inativa
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     private void Update()
     {
-        if (!isActive) return;
-
+        if (BallType.Enemy == ballType)
+            return;
         // Aplica gravidade à velocidade vertical
-        velocity.y -= gravity * Time.deltaTime;
+        velocity.y -= GRAVITY * Time.deltaTime;
 
         // Atualiza a posição da bola
         transform.position += velocity * Time.deltaTime;
@@ -57,28 +53,31 @@ public class BallController : MonoBehaviour
             {
                 velocity.y = bounceForce;
             }
-            groundSplash.Play();
+            VFXController.Instance.PlayEffect(gameObject.transform, 2);
         }
 
         // Detecção da raquete
         else if (((1 << other.gameObject.layer) & racketLayer) != 0)
         {
+        /*
             // Obter a velocidade da raquete
             RacketController racket = other.GetComponent<RacketController>();
             if (racket != null)
             {
-                Vector3 racketDirection = other.transform.forward; // Direção da raquete
+                Vector3 collisionNormal = other.transform.position; // Direção da superfície da raquete
+                Vector3 reflectedDirection = Vector3.Reflect(racket.enemyBall.transform.position.normalized, collisionNormal); // Direção refletida
                 float racketSpeed = racket.racketSpeed; // Velocidade da raquete
-                Launch(racketDirection, racketSpeed);
+                Launch(reflectedDirection, racketSpeed);
+                 Debug.Log(reflectedDirection);
             }
             //racketSplash.Play();
             // Desativa a bola atual
-            isActive = false;
-            gameObject.SetActive(false);
+            Debug.Log(racket.enemyBall.transform.position.normalized);
+           */
         }
         else if (other.gameObject.layer == 4)
         {
-            waterSplash.Play();
+            VFXController.Instance.PlayEffect(gameObject.transform, 1);
         }
         // Detecção de fora da quadra
         else if (((1 << other.gameObject.layer) & courtBoundsLayer) != 0)
@@ -94,7 +93,6 @@ public class BallController : MonoBehaviour
         // Ajusta a velocidade com base na velocidade da raquete
         float adjustedSpeed = baseSpeed + (racketSpeed * racketSpeedInfluence);
         velocity = direction.normalized * adjustedSpeed;
-        isActive = true;
     }
     #region EnemyAtack
     private void EnemyAttack()
@@ -137,7 +135,6 @@ public class BallController : MonoBehaviour
     private void ResetBall()
     {
         // Reseta a posição da bola e desativa
-        isActive = false;
         gameObject.SetActive(false);
         velocity = Vector3.zero;
     }
