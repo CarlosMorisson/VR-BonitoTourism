@@ -21,6 +21,8 @@ public class BallController : MonoBehaviour
     private Transform[] enemyDestiny;
     private Dictionary<(int, int), Action> _actionMap;
     private float enemySpeedForce;
+    [SerializeField]
+    private float enemyJumpForce;
     public enum BallType
     {
         Enemy,
@@ -95,7 +97,7 @@ public class BallController : MonoBehaviour
         velocity = direction.normalized * adjustedSpeed;
     }
     #region EnemyAtack
-    private void EnemyAttack()
+    public void EnemyAttack()
     {
         _actionMap = new Dictionary<(int, int), Action>
         {
@@ -106,7 +108,7 @@ public class BallController : MonoBehaviour
         };
 
         // Gera um número aleatório
-        enemySpeedForce = UnityEngine.Random.Range(2, 4);
+        enemySpeedForce = UnityEngine.Random.Range(2, 3);
         int randomAttack = UnityEngine.Random.Range(0, 12);
         Debug.Log($"Random attack: {randomAttack}");
 
@@ -127,10 +129,54 @@ public class BallController : MonoBehaviour
         }
 
     }
-    void ActionForRange6To9() => transform.DOJump(enemyDestiny[0].transform.position, baseSpeed, 2, enemySpeedForce);
-    void ActionForRange3To6() => transform.DOJump(enemyDestiny[1].transform.position, baseSpeed, 2, enemySpeedForce);
-    void ActionForRange0To3() => transform.DOJump(enemyDestiny[2].transform.position, baseSpeed, 2, enemySpeedForce);
-    void ActionForRange9To11() => transform.DOJump(enemyDestiny[3].transform.position, baseSpeed, 2, enemySpeedForce);
+    void ActionForRange3To6()
+    {
+        transform.DOJump(enemyDestiny[1].position, enemyJumpForce, 1, enemySpeedForce)
+            .SetEase(Ease.InSine) // Suaviza a subida e descida
+            .OnComplete(() =>
+            {
+            // Executa o segundo salto ao terminar o primeiro
+            transform.DOJump(enemyDestiny[1].GetChild(0).position, enemyJumpForce, 1, enemySpeedForce)
+                    .SetEase(Ease.OutSine);
+            });
+    }
+    void ActionForRange6To9()
+    {
+        transform.DOJump(enemyDestiny[0].position, enemyJumpForce, 1, enemySpeedForce)
+            .SetEase(Ease.InSine) // Suaviza a subida e descida
+            .OnComplete(() =>
+            {
+                // Executa o segundo salto ao terminar o primeiro
+                transform.DOJump(enemyDestiny[0].GetChild(0).position, enemyJumpForce, 1, enemySpeedForce)
+                        .SetEase(Ease.OutSine);
+            });
+    }
+
+    void ActionForRange0To3()
+    {
+        transform.DOJump(enemyDestiny[2].position, enemyJumpForce, 1, enemySpeedForce)
+            .SetEase(Ease.InSine) // Suaviza a subida e descida
+            .OnComplete(() =>
+            {
+            // Executa o segundo salto ao terminar o primeiro
+            transform.DOJump(enemyDestiny[2].GetChild(0).position, enemyJumpForce, 1, enemySpeedForce)
+                    .SetEase(Ease.OutSine);
+            });
+    }
+
+    void ActionForRange9To11()
+    {
+        transform.DOJump(enemyDestiny[3].position, enemyJumpForce, 1, enemySpeedForce)
+            .SetEase(Ease.InSine) // Suaviza a subida e descida
+            .OnComplete(() =>
+            {
+            // Executa o segundo salto ao terminar o primeiro
+            transform.DOJump(enemyDestiny[3].GetChild(0).position, enemyJumpForce, 1, enemySpeedForce)
+                    .SetEase(Ease.OutSine);
+            });
+    }
+
+
     #endregion
     private void ResetBall()
     {

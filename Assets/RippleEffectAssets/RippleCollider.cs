@@ -23,7 +23,6 @@ public class RippleCollider : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
-        Debug.Log(gameObject.name);
     }
 
     // Update is called once per frame
