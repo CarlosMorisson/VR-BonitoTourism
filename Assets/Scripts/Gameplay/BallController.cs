@@ -13,7 +13,7 @@ public class BallController : MonoBehaviour
     public LayerMask racketLayer;        // Camada da raquete
     public LayerMask courtBoundsLayer;   // Camada que delimita a quadra
     public float racketSpeedInfluence = 0.5f; // Fator de influência da velocidade da raquete
-
+    private int _kicks;
     public Vector3 velocity;            // Velocidade atual da bola
     // Define se a bola está ativa
     [Header ("Enemy ball")]
@@ -61,21 +61,7 @@ public class BallController : MonoBehaviour
         // Detecção da raquete
         else if (((1 << other.gameObject.layer) & racketLayer) != 0)
         {
-        /*
-            // Obter a velocidade da raquete
-            RacketController racket = other.GetComponent<RacketController>();
-            if (racket != null)
-            {
-                Vector3 collisionNormal = other.transform.position; // Direção da superfície da raquete
-                Vector3 reflectedDirection = Vector3.Reflect(racket.enemyBall.transform.position.normalized, collisionNormal); // Direção refletida
-                float racketSpeed = racket.racketSpeed; // Velocidade da raquete
-                Launch(reflectedDirection, racketSpeed);
-                 Debug.Log(reflectedDirection);
-            }
-            //racketSplash.Play();
-            // Desativa a bola atual
-            Debug.Log(racket.enemyBall.transform.position.normalized);
-           */
+
         }
         else if (other.gameObject.layer == 4)
         {
@@ -90,10 +76,10 @@ public class BallController : MonoBehaviour
         }
     }
 
-    public void Launch(Vector3 direction, float racketSpeed)
+    public void Launch(Vector3 direction, float racketSpeed, float lastSpeed)
     {
         // Ajusta a velocidade com base na velocidade da raquete
-        float adjustedSpeed = baseSpeed + (racketSpeed * racketSpeedInfluence);
+        float adjustedSpeed = baseSpeed + (racketSpeed * racketSpeedInfluence) + lastSpeed/2;
         velocity = direction.normalized * adjustedSpeed;
     }
     #region EnemyAtack

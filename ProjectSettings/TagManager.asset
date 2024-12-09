@@ -17,6 +17,7 @@ TagManager:
   - Hand
   - Destiny
   - NPC
+  - Net
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - Obstacles
   - Field
   - Racket
-  - 
+  - Net
   - 
   - 
   - 

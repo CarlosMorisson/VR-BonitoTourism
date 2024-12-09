@@ -44,7 +44,7 @@ public class RacketController : MonoBehaviour
 
             // Lança a bola do jogador com a direção da bola inimiga
             float enemySpeed = enemyBall.GetComponent<BallController>().velocity.magnitude; // Obtém a velocidade da bola inimiga
-            playerBall.GetComponent<BallController>().Launch(launchDirection, enemySpeed);
+            playerBall.GetComponent<BallController>().Launch(launchDirection,racketSpeed, enemySpeed);
         }
     }
 }

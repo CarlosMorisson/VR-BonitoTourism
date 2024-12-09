@@ -24,7 +24,7 @@ public class EnemyControl : MonoBehaviour
         // Calcula a distância até a bola
         float distanceToBall = Vector3.Distance(PlayerBall.position, racket.position);
 
-        if (distanceToBall <= reactionDistance)
+        if (distanceToBall <= reactionDistance && PlayerBall.gameObject.activeSelf)
         {
             // Move a raquete em direção à posição da bola no eixo X e Z
             Vector3 targetPosition = new Vector3(PlayerBall.position.x, racket.position.y, PlayerBall.position.z);
