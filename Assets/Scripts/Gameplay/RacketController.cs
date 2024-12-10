@@ -4,7 +4,7 @@ public class RacketController : MonoBehaviour
 {
     public GameObject playerBall; // A bola do jogador
     public GameObject enemyBall;  // A bola do inimigo
-
+    public Transform centerRacket;
     private Vector3 lastPosition; // Armazena a posição anterior da raquete
     public float racketSpeed { get; private set; } // Velocidade da raquete
     public Vector3 lastVelocity {get; private set; }
@@ -33,13 +33,13 @@ public class RacketController : MonoBehaviour
             float dotProduct = Vector3.Dot(relativePosition, transform.right);
 
             // Determina a direção de lançamento
-            Vector3 launchDirection = dotProduct > 0 ? transform.right : -transform.right;
+            Vector3 launchDirection = dotProduct > 0 ? centerRacket.forward : -centerRacket.forward;
             // Desativa a bola do inimigo
             enemyBall.SetActive(false);
 
             // Posiciona e ativa a bola do jogador
-            playerBall.transform.rotation = transform.rotation;
-            playerBall.transform.position = transform.position + transform.forward * 0.5f; // Ajuste de posição
+            playerBall.transform.rotation = centerRacket.rotation;
+            playerBall.transform.position = centerRacket.position + centerRacket.forward * 0.5f; // Ajuste de posição
             playerBall.SetActive(true);
 
             // Lança a bola do jogador com a direção da bola inimiga

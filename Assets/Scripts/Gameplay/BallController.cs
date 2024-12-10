@@ -122,7 +122,7 @@ public class BallController : MonoBehaviour
             .OnComplete(() =>
             {
             // Executa o segundo salto ao terminar o primeiro
-            transform.DOJump(enemyDestiny[1].GetChild(0).position, enemyJumpForce, 1, enemySpeedForce)
+            transform.DOJump(enemyDestiny[1].GetChild(0).position, enemyJumpForce/2, 1, enemySpeedForce)
                     .SetEase(Ease.OutSine);
             });
     }
@@ -133,7 +133,7 @@ public class BallController : MonoBehaviour
             .OnComplete(() =>
             {
                 // Executa o segundo salto ao terminar o primeiro
-                transform.DOJump(enemyDestiny[0].GetChild(0).position, enemyJumpForce, 1, enemySpeedForce)
+                transform.DOJump(enemyDestiny[0].GetChild(0).position, enemyJumpForce / 2, 1, enemySpeedForce)
                         .SetEase(Ease.OutSine);
             });
     }
@@ -145,7 +145,7 @@ public class BallController : MonoBehaviour
             .OnComplete(() =>
             {
             // Executa o segundo salto ao terminar o primeiro
-            transform.DOJump(enemyDestiny[2].GetChild(0).position, enemyJumpForce, 1, enemySpeedForce)
+            transform.DOJump(enemyDestiny[2].GetChild(0).position, enemyJumpForce / 2, 1, enemySpeedForce)
                     .SetEase(Ease.OutSine);
             });
     }
@@ -157,7 +157,7 @@ public class BallController : MonoBehaviour
             .OnComplete(() =>
             {
             // Executa o segundo salto ao terminar o primeiro
-            transform.DOJump(enemyDestiny[3].GetChild(0).position, enemyJumpForce, 1, enemySpeedForce)
+            transform.DOJump(enemyDestiny[3].GetChild(0).position, enemyJumpForce / 2, 1, enemySpeedForce)
                     .SetEase(Ease.OutSine);
             });
     }
