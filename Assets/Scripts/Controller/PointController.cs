@@ -41,13 +41,13 @@ public class PointController : MonoBehaviour
     private void HandleNetHit()
     {
         Debug.Log("Bola bateu na rede!");
-        AwardPointToOpponent();
+        //AwardPointToOpponent();
     }
 
     private void HandleOutOfBounds()
     {
         Debug.Log("Bola fora da quadra!");
-        AwardPointToOpponent();
+        //AwardPointToOpponent();
     }
 
     private void HandleBounceInCourt()
@@ -61,6 +61,7 @@ public class PointController : MonoBehaviour
             if (GetComponent<BallController>().ballType == BallController.BallType.Enemy || GetComponent<BallController>().ballType == BallController.BallType.Player)
             {
                 Debug.Log("A bola foi devolvida!");
+                bounceCount = 0;
             }
         }
         else if (bounceCount > 1)
@@ -72,7 +73,7 @@ public class PointController : MonoBehaviour
             }
             else if (GetComponent<BallController>().ballType == BallController.BallType.Player)
             {
-                AwardPointToPlayer();
+                //AwardPointToPlayer();
             }
         }
     }
@@ -86,6 +87,7 @@ public class PointController : MonoBehaviour
     {
         playerPoints++;
         Debug.Log($"Jogador marcou um ponto! Pontuação: {playerPoints}");
+        UIController.instance.UpdateScore(false, playerPoints);
         ResetBall();
     }
 
@@ -93,6 +95,7 @@ public class PointController : MonoBehaviour
     {
         enemyPoints++;
         Debug.Log($"Adversário marcou um ponto! Pontuação: {enemyPoints}");
+        UIController.instance.UpdateScore(true, enemyPoints);
         ResetBall();
     }
 
@@ -103,7 +106,7 @@ public class PointController : MonoBehaviour
         enemyBall.gameObject.SetActive(true);
         enemyBall.position = startPos.position;
         enemyBall.GetComponent<Rigidbody>().velocity = Vector3.zero;
-
+        bounceCount = 0;
         enemyBall.transform.DOMoveZ(20, 5).SetLoops(-1, LoopType.Yoyo);
     }
 

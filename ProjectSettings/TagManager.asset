@@ -18,6 +18,7 @@ TagManager:
   - Destiny
   - NPC
   - Net
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -7,38 +7,57 @@ public class BallController : MonoBehaviour
 {
     [Header("Ball Values")]
     public float baseSpeed = 10f;        // Velocidade base da bola
-    public const float GRAVITY = 9.8f;         // Intensidade da gravidade
-    public float bounceForce = 5f;       // Força do quique no chão
-    public LayerMask groundLayer;        // Camada do chão
-    public LayerMask racketLayer;        // Camada da raquete
-    public LayerMask courtBoundsLayer;   // Camada que delimita a quadra
+    public const float GRAVITY = 9.8f;  // Intensidade da gravidade
+    public float bounceForce = 5f;      // Força do quique no chão
+    public LayerMask groundLayer;       // Camada do chão
+    public LayerMask racketLayer;       // Camada da raquete
+    public LayerMask courtBoundsLayer;  // Camada que delimita a quadra
     public float racketSpeedInfluence = 0.5f; // Fator de influência da velocidade da raquete
-    private int _kicks;
     public Vector3 velocity;            // Velocidade atual da bola
-    // Define se a bola está ativa
-    [Header ("Enemy ball")]
+
+    [Header("Trail Renderer")]
+    private LineRenderer lineRenderer;  // LineRenderer para desenhar a trajetória
+    public int predictionSteps = 50;    // Número de passos para prever a trajetória
+    public float predictionTimeStep = 0.05f; // Intervalo de tempo para os cálculos
+
+    [Header("Enemy ball")]
     [SerializeField]
     private Transform[] enemyDestiny;
     private Dictionary<(int, int), Action> _actionMap;
     private float enemySpeedForce;
     [SerializeField]
     private float enemyJumpForce;
+
     public enum BallType
     {
         Enemy,
         Player
     };
+
     public BallType ballType;
+
     private void Start()
     {
-        // Inicializa a bola como inativa
-        //gameObject.SetActive(false);
+        // Configura o LineRenderer
+        lineRenderer = GetComponent<LineRenderer>();
+        if (lineRenderer == null)
+        {
+            lineRenderer = gameObject.AddComponent<LineRenderer>();
+        }
+
+        // Configurações básicas do LineRenderer
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        lineRenderer.startColor = new Color(255, 255, 0,0.3f);
+        lineRenderer.endColor = new Color(255, 0, 0, 0.3f);
     }
 
     private void Update()
     {
         if (BallType.Enemy == ballType)
             return;
+
         // Aplica gravidade à velocidade vertical
         velocity.y -= GRAVITY * Time.deltaTime;
 
@@ -61,16 +80,18 @@ public class BallController : MonoBehaviour
         // Detecção da raquete
         else if (((1 << other.gameObject.layer) & racketLayer) != 0)
         {
+            ResetTrail();
+        }
 
-        }
-        else if (other.gameObject.layer == 4)
+        // Detecção do inimigo
+        else if (other.CompareTag("Enemy"))
         {
-            VFXController.Instance.PlayEffect(gameObject.transform, 1);
+            ResetTrail();
         }
+
         // Detecção de fora da quadra
         else if (((1 << other.gameObject.layer) & courtBoundsLayer) != 0)
         {
-            // Lógica para marcar pontos (você pode implementar sua própria lógica aqui)
             Debug.Log("Ponto marcado!");
             ResetBall();
         }
@@ -79,10 +100,47 @@ public class BallController : MonoBehaviour
     public void Launch(Vector3 direction, float racketSpeed, float lastSpeed)
     {
         // Ajusta a velocidade com base na velocidade da raquete
-        float adjustedSpeed = baseSpeed + (racketSpeed * racketSpeedInfluence) + lastSpeed/2;
+        float adjustedSpeed = baseSpeed + (racketSpeed * racketSpeedInfluence) + lastSpeed / 2;
         velocity = direction.normalized * adjustedSpeed;
+
+        // Desenha a trajetória antes do lançamento
     }
-    #region EnemyAtack
+
+    private void DrawParabolicTrajectory(Vector3 startPoint, Vector3 endPoint, float height, int resolution)
+    {
+        lineRenderer.positionCount = resolution + 1;
+        for (int i = 0; i <= resolution; i++)
+        {
+            float t = (float)i / (float)resolution;
+            Vector3 point = CalculateParabolaPoint(startPoint, endPoint, height, t);
+            lineRenderer.SetPosition(i, point);
+        }
+    }
+
+    private Vector3 CalculateParabolaPoint(Vector3 startPoint, Vector3 endPoint, float height, float t)
+    {
+        float parabolicT = 4 * t * (1 - t);
+        Vector3 heightOffset = Vector3.up * height * parabolicT;
+        return Vector3.Lerp(startPoint, endPoint, t) + heightOffset;
+    }
+
+    private void ResetTrail()
+    {
+        // Reseta o rastro da bola
+        lineRenderer.positionCount = 0;
+    }
+
+    private void ResetBall()
+    {
+        // Reseta a posição e desativa a bola
+        gameObject.SetActive(false);
+        velocity = Vector3.zero;
+
+        // Reseta o trail
+        ResetTrail();
+    }
+
+    #region EnemyAttack
     public void EnemyAttack()
     {
         _actionMap = new Dictionary<(int, int), Action>
@@ -100,74 +158,116 @@ public class BallController : MonoBehaviour
 
         // Executa a ação correspondente
         PerformAction(randomAttack);
-
     }
+
     void PerformAction(int value)
     {
         foreach (var range in _actionMap)
         {
-            // Verifica se o valor está no intervalo
             if (value >= range.Key.Item1 && value < range.Key.Item2)
             {
-                range.Value.Invoke(); // Executa a ação associada ao intervalo
+                range.Value.Invoke();
                 return;
             }
         }
-
     }
+
     void ActionForRange3To6()
     {
-        transform.DOJump(enemyDestiny[1].position, enemyJumpForce, 1, enemySpeedForce)
-            .SetEase(Ease.InSine) // Suaviza a subida e descida
+        Vector3 start = transform.position;
+        Vector3 end = enemyDestiny[0].position;
+        float jumpHeight = enemyJumpForce; // Ajuste conforme necessário
+        int trajectoryResolution = 20; // Número de pontos na linha
+
+        // Desenha a trajetória parabólica
+        DrawParabolicTrajectory(start, end, jumpHeight, trajectoryResolution);
+        // Primeiro salto
+        transform.DOJump(end, enemyJumpForce, 1, enemySpeedForce)
+            .SetEase(Ease.InSine)
             .OnComplete(() =>
             {
-            // Executa o segundo salto ao terminar o primeiro
-            transform.DOJump(enemyDestiny[1].GetChild(0).position, enemyJumpForce/2, 1, enemySpeedForce)
+                // Ativa o LineRenderer no impacto
+                Vector3 nextEnd = enemyDestiny[0].GetChild(0).position;
+                DrawParabolicTrajectory(start, end, jumpHeight, trajectoryResolution);
+
+                // Segundo salto
+                transform.DOJump(nextEnd, enemyJumpForce / 2, 1, enemySpeedForce)
                     .SetEase(Ease.OutSine);
             });
     }
+
     void ActionForRange6To9()
     {
-        transform.DOJump(enemyDestiny[0].position, enemyJumpForce, 1, enemySpeedForce)
-            .SetEase(Ease.InSine) // Suaviza a subida e descida
+        Vector3 start = transform.position;
+        Vector3 end = enemyDestiny[1].position;
+        float jumpHeight = enemyJumpForce; // Ajuste conforme necessário
+        int trajectoryResolution = 20; // Número de pontos na linha
+
+        // Desenha a trajetória parabólica
+        DrawParabolicTrajectory(start, end, jumpHeight, trajectoryResolution);
+        // Primeiro salto
+        transform.DOJump(end, enemyJumpForce, 1, enemySpeedForce)
+            .SetEase(Ease.InSine)
             .OnComplete(() =>
             {
-                // Executa o segundo salto ao terminar o primeiro
-                transform.DOJump(enemyDestiny[0].GetChild(0).position, enemyJumpForce / 2, 1, enemySpeedForce)
-                        .SetEase(Ease.OutSine);
+                // Ativa o LineRenderer no impacto
+                Vector3 nextEnd = enemyDestiny[1].GetChild(0).position;
+                DrawParabolicTrajectory(start, end, jumpHeight, trajectoryResolution);
+
+                // Segundo salto
+                transform.DOJump(nextEnd, enemyJumpForce / 2, 1, enemySpeedForce)
+                    .SetEase(Ease.OutSine);
             });
     }
 
     void ActionForRange0To3()
     {
-        transform.DOJump(enemyDestiny[2].position, enemyJumpForce, 1, enemySpeedForce)
-            .SetEase(Ease.InSine) // Suaviza a subida e descida
+        Vector3 start = transform.position;
+        Vector3 end = enemyDestiny[2].position;
+        float jumpHeight = enemyJumpForce; // Ajuste conforme necessário
+        int trajectoryResolution = 20; // Número de pontos na linha
+
+        // Desenha a trajetória parabólica
+        DrawParabolicTrajectory(start, end, jumpHeight, trajectoryResolution);
+        // Primeiro salto
+        transform.DOJump(end, enemyJumpForce, 1, enemySpeedForce)
+            .SetEase(Ease.InSine)
             .OnComplete(() =>
             {
-            // Executa o segundo salto ao terminar o primeiro
-            transform.DOJump(enemyDestiny[2].GetChild(0).position, enemyJumpForce / 2, 1, enemySpeedForce)
+                // Ativa o LineRenderer no impacto
+                Vector3 nextEnd = enemyDestiny[2].GetChild(0).position;
+                DrawParabolicTrajectory(start, end, jumpHeight, trajectoryResolution);
+
+                // Segundo salto
+                transform.DOJump(nextEnd, enemyJumpForce / 2, 1, enemySpeedForce)
                     .SetEase(Ease.OutSine);
             });
     }
 
     void ActionForRange9To11()
     {
-        transform.DOJump(enemyDestiny[3].position, enemyJumpForce, 1, enemySpeedForce)
-            .SetEase(Ease.InSine) // Suaviza a subida e descida
+        Vector3 start = transform.position;
+        Vector3 end = enemyDestiny[3].position;
+        float jumpHeight = enemyJumpForce; // Ajuste conforme necessário
+        int trajectoryResolution = 20; // Número de pontos na linha
+
+        // Desenha a trajetória parabólica
+        DrawParabolicTrajectory(start, end, jumpHeight, trajectoryResolution);
+        // Primeiro salto
+        transform.DOJump(end, enemyJumpForce, 1, enemySpeedForce)
+            .SetEase(Ease.InSine)
             .OnComplete(() =>
             {
-            // Executa o segundo salto ao terminar o primeiro
-            transform.DOJump(enemyDestiny[3].GetChild(0).position, enemyJumpForce / 2, 1, enemySpeedForce)
+                // Ativa o LineRenderer no impacto
+                Vector3 nextEnd = enemyDestiny[3].GetChild(0).position;
+                DrawParabolicTrajectory(start, end, jumpHeight, trajectoryResolution);
+
+                // Segundo salto
+                transform.DOJump(nextEnd, enemyJumpForce / 2, 1, enemySpeedForce)
                     .SetEase(Ease.OutSine);
             });
     }
 
 
     #endregion
-    private void ResetBall()
-    {
-        // Reseta a posição da bola e desativa
-        gameObject.SetActive(false);
-        velocity = Vector3.zero;
-    }
 }
