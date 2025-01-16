@@ -106,14 +106,25 @@ public class BallController : MonoBehaviour
         // Desenha a trajetória antes do lançamento
     }
 
-    private void DrawParabolicTrajectory(Vector3 startPoint, Vector3 endPoint, float height, int resolution)
+    private void DrawParabolicTrajectory(Vector3 startPoint, Vector3 firstEndPoint, float firstHeight, Vector3 secondEndPoint, float secondHeight, int resolution)
     {
-        lineRenderer.positionCount = resolution + 1;
+        lineRenderer.positionCount = (resolution + 1) * 2 - 1;
+        int index = 0;
+
+        // Primeira parábola
         for (int i = 0; i <= resolution; i++)
         {
-            float t = (float)i / (float)resolution;
-            Vector3 point = CalculateParabolaPoint(startPoint, endPoint, height, t);
-            lineRenderer.SetPosition(i, point);
+            float t = (float)i / resolution;
+            Vector3 point = CalculateParabolaPoint(startPoint, firstEndPoint, firstHeight, t);
+            lineRenderer.SetPosition(index++, point);
+        }
+
+        // Segunda parábola
+        for (int i = 1; i <= resolution; i++)
+        {
+            float t = (float)i / resolution;
+            Vector3 point = CalculateParabolaPoint(firstEndPoint, secondEndPoint, secondHeight, t);
+            lineRenderer.SetPosition(index++, point);
         }
     }
 
@@ -179,16 +190,13 @@ public class BallController : MonoBehaviour
         float jumpHeight = enemyJumpForce; // Ajuste conforme necessário
         int trajectoryResolution = 20; // Número de pontos na linha
 
-        // Desenha a trajetória parabólica
-        DrawParabolicTrajectory(start, end, jumpHeight, trajectoryResolution);
-        // Primeiro salto
+        DrawParabolicTrajectory(start, end, jumpHeight, enemyDestiny[0].GetChild(0).position, jumpHeight/2, 10);
         transform.DOJump(end, enemyJumpForce, 1, enemySpeedForce)
             .SetEase(Ease.InSine)
             .OnComplete(() =>
             {
                 // Ativa o LineRenderer no impacto
                 Vector3 nextEnd = enemyDestiny[0].GetChild(0).position;
-                DrawParabolicTrajectory(start, end, jumpHeight, trajectoryResolution);
 
                 // Segundo salto
                 transform.DOJump(nextEnd, enemyJumpForce / 2, 1, enemySpeedForce)
@@ -204,15 +212,13 @@ public class BallController : MonoBehaviour
         int trajectoryResolution = 20; // Número de pontos na linha
 
         // Desenha a trajetória parabólica
-        DrawParabolicTrajectory(start, end, jumpHeight, trajectoryResolution);
-        // Primeiro salto
+        DrawParabolicTrajectory(start, end, jumpHeight, enemyDestiny[1].GetChild(0).position, jumpHeight / 2, 10);
         transform.DOJump(end, enemyJumpForce, 1, enemySpeedForce)
             .SetEase(Ease.InSine)
             .OnComplete(() =>
             {
                 // Ativa o LineRenderer no impacto
                 Vector3 nextEnd = enemyDestiny[1].GetChild(0).position;
-                DrawParabolicTrajectory(start, end, jumpHeight, trajectoryResolution);
 
                 // Segundo salto
                 transform.DOJump(nextEnd, enemyJumpForce / 2, 1, enemySpeedForce)
@@ -228,15 +234,13 @@ public class BallController : MonoBehaviour
         int trajectoryResolution = 20; // Número de pontos na linha
 
         // Desenha a trajetória parabólica
-        DrawParabolicTrajectory(start, end, jumpHeight, trajectoryResolution);
-        // Primeiro salto
+        DrawParabolicTrajectory(start, end, jumpHeight, enemyDestiny[2].GetChild(0).position, jumpHeight / 2, 10);
         transform.DOJump(end, enemyJumpForce, 1, enemySpeedForce)
             .SetEase(Ease.InSine)
             .OnComplete(() =>
             {
                 // Ativa o LineRenderer no impacto
                 Vector3 nextEnd = enemyDestiny[2].GetChild(0).position;
-                DrawParabolicTrajectory(start, end, jumpHeight, trajectoryResolution);
 
                 // Segundo salto
                 transform.DOJump(nextEnd, enemyJumpForce / 2, 1, enemySpeedForce)
@@ -252,16 +256,14 @@ public class BallController : MonoBehaviour
         int trajectoryResolution = 20; // Número de pontos na linha
 
         // Desenha a trajetória parabólica
-        DrawParabolicTrajectory(start, end, jumpHeight, trajectoryResolution);
-        // Primeiro salto
+        DrawParabolicTrajectory(start, end, jumpHeight, enemyDestiny[4].GetChild(0).position, jumpHeight / 2, 10);
         transform.DOJump(end, enemyJumpForce, 1, enemySpeedForce)
             .SetEase(Ease.InSine)
             .OnComplete(() =>
             {
                 // Ativa o LineRenderer no impacto
                 Vector3 nextEnd = enemyDestiny[3].GetChild(0).position;
-                DrawParabolicTrajectory(start, end, jumpHeight, trajectoryResolution);
-
+                
                 // Segundo salto
                 transform.DOJump(nextEnd, enemyJumpForce / 2, 1, enemySpeedForce)
                     .SetEase(Ease.OutSine);

@@ -8,6 +8,12 @@ public class RacketController : MonoBehaviour
     private Vector3 lastPosition; // Armazena a posição anterior da raquete
     public float racketSpeed { get; private set; } // Velocidade da raquete
     public Vector3 lastVelocity {get; private set; }
+    public enum DirectionType
+    {
+        front,
+        back
+    };
+    public DirectionType directionType;
     private void Start()
     {
         // Inicializa a posição da raquete
@@ -29,11 +35,8 @@ public class RacketController : MonoBehaviour
             // Obtém a direção da bola inimiga
             Vector3 relativePosition = enemyBall.transform.position - transform.position;
 
-            // Verifica o lado da colisão com base no produto escalar
-            float dotProduct = Vector3.Dot(relativePosition, transform.right);
-
             // Determina a direção de lançamento
-            Vector3 launchDirection = dotProduct > 0 ? centerRacket.forward : -centerRacket.forward;
+            Vector3 launchDirection = DirectionType.front == directionType ? -centerRacket.forward : centerRacket.forward;
             // Desativa a bola do inimigo
             enemyBall.SetActive(false);
 

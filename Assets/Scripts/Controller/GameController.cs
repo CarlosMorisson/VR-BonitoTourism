@@ -55,6 +55,10 @@ public class GameController : MonoBehaviour
         audioSource.Play();
         finished=true;
     }
+    public void StartGame()
+    {
+        PointController.Instance.ResetBall();
+    }
     public void RestartGame()
     {
         SceneManager.LoadScene("SampleScene 1");

@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 public class PointController : MonoBehaviour
 {
+    public static PointController Instance;
     [Header("Layers")]
     public LayerMask netLayer;          // Camada da rede
     public LayerMask courtBoundsLayer;  // Camada das bordas da quadra
@@ -41,13 +42,27 @@ public class PointController : MonoBehaviour
     private void HandleNetHit()
     {
         Debug.Log("Bola bateu na rede!");
-        //AwardPointToOpponent();
+        AwardPointToOpponent();
     }
 
     private void HandleOutOfBounds()
     {
         Debug.Log("Bola fora da quadra!");
-        //AwardPointToOpponent();
+        if (GetComponent<BallController>().ballType == BallController.BallType.Enemy)
+        {
+            if (bounceCount != 0)
+                AwardPointToOpponent();
+            else
+                AwardPointToPlayer();
+        }
+        else if(GetComponent<BallController>().ballType == BallController.BallType.Player)
+        {
+            if (bounceCount != 0)
+                AwardPointToPlayer();
+            else
+                AwardPointToOpponent();
+        }
+           
     }
 
     private void HandleBounceInCourt()
@@ -73,7 +88,7 @@ public class PointController : MonoBehaviour
             }
             else if (GetComponent<BallController>().ballType == BallController.BallType.Player)
             {
-                //AwardPointToPlayer();
+                AwardPointToPlayer();
             }
         }
     }
@@ -94,12 +109,13 @@ public class PointController : MonoBehaviour
     private void AwardPointToOpponent()
     {
         enemyPoints++;
+        Debug.Log("ativou");
         Debug.Log($"Adversário marcou um ponto! Pontuação: {enemyPoints}");
         UIController.instance.UpdateScore(true, enemyPoints);
         ResetBall();
     }
 
-    private void ResetBall()
+    public void ResetBall()
     {
         // Reseta a posição da bola no centro da quadra
         ball.gameObject.SetActive(false);
@@ -116,5 +132,9 @@ public class PointController : MonoBehaviour
         enemyPoints = 0;
         ResetBall();
         Debug.Log("Partida iniciada!");
+    }
+    private void Start()
+    {
+        Instance = this;
     }
 }
