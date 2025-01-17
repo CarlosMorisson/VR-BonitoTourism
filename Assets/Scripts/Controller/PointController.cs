@@ -19,7 +19,7 @@ public class PointController : MonoBehaviour
     private int playerPoints = 0;      // Pontos do jogador
     private int enemyPoints = 0;       // Pontos do adversário
     private int bounceCount = 0;       // Número de quiques da bola
-
+    
     private void OnTriggerEnter(Collider other)
     {
         // Detecta colisões com a rede
@@ -35,6 +35,7 @@ public class PointController : MonoBehaviour
         // Verifica se quicou na quadra válida
         else if (IsInLayerMask(other.gameObject, courtLayer))
         {
+            Debug.Log("Ativou aqui");
             HandleBounceInCourt();
         }
     }
@@ -76,7 +77,7 @@ public class PointController : MonoBehaviour
             if (GetComponent<BallController>().ballType == BallController.BallType.Enemy || GetComponent<BallController>().ballType == BallController.BallType.Player)
             {
                 Debug.Log("A bola foi devolvida!");
-                bounceCount = 0;
+                //bounceCount = 0;
             }
         }
         else if (bounceCount > 1)
@@ -118,6 +119,7 @@ public class PointController : MonoBehaviour
     public void ResetBall()
     {
         // Reseta a posição da bola no centro da quadra
+        enemyBall.position = startPos.position;
         ball.gameObject.SetActive(false);
         enemyBall.gameObject.SetActive(true);
         enemyBall.position = startPos.position;

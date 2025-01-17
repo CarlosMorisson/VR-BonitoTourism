@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.32623428, g: 0.26366332, b: 0.3755548, a: 1}
+  m_IndirectSpecularColor: {r: 0.32617566, g: 0.26364255, b: 0.3755485, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1511,6 +1511,7 @@ MonoBehaviour:
     m_Bits: 0
   racketSpeedInfluence: 0.5
   velocity: {x: 0, y: 0, z: 0}
+  timeValue: 1
   predictionSteps: 50
   predictionTimeStep: 0.05
   enemyDestiny:
@@ -1576,10 +1577,10 @@ MonoBehaviour:
     m_Bits: 4096
   courtBoundsLayer:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 16
   courtLayer:
     serializedVersion: 2
-    m_Bits: 16
+    m_Bits: 1024
   enemyBall: {fileID: 298120112}
   ball: {fileID: 298120112}
   playerRacket: {fileID: 477347902}
@@ -10088,6 +10089,7 @@ MonoBehaviour:
     m_Bits: 0
   racketSpeedInfluence: 0.5
   velocity: {x: 0, y: 0, z: 0}
+  timeValue: 1
   predictionSteps: 50
   predictionTimeStep: 0.05
   enemyDestiny: []
@@ -10135,7 +10137,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

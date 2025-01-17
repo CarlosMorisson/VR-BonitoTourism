@@ -14,6 +14,7 @@ public class BallController : MonoBehaviour
     public LayerMask courtBoundsLayer;  // Camada que delimita a quadra
     public float racketSpeedInfluence = 0.5f; // Fator de influência da velocidade da raquete
     public Vector3 velocity;            // Velocidade atual da bola
+    public int timeValue;
 
     [Header("Trail Renderer")]
     private LineRenderer lineRenderer;  // LineRenderer para desenhar a trajetória
@@ -163,7 +164,7 @@ public class BallController : MonoBehaviour
         };
 
         // Gera um número aleatório
-        enemySpeedForce = UnityEngine.Random.Range(2, 3);
+        enemySpeedForce = UnityEngine.Random.Range(4, 5);
         int randomAttack = UnityEngine.Random.Range(0, 12);
         Debug.Log($"Random attack: {randomAttack}");
 
@@ -191,7 +192,7 @@ public class BallController : MonoBehaviour
         int trajectoryResolution = 20; // Número de pontos na linha
 
         DrawParabolicTrajectory(start, end, jumpHeight, enemyDestiny[0].GetChild(0).position, jumpHeight/2, 10);
-        transform.DOJump(end, enemyJumpForce, 1, enemySpeedForce)
+        transform.DOJump(end, enemyJumpForce, timeValue, enemySpeedForce)
             .SetEase(Ease.InSine)
             .OnComplete(() =>
             {
@@ -199,7 +200,7 @@ public class BallController : MonoBehaviour
                 Vector3 nextEnd = enemyDestiny[0].GetChild(0).position;
 
                 // Segundo salto
-                transform.DOJump(nextEnd, enemyJumpForce / 2, 1, enemySpeedForce)
+                transform.DOJump(nextEnd, enemyJumpForce / 2, timeValue, enemySpeedForce)
                     .SetEase(Ease.OutSine);
             });
     }
@@ -213,7 +214,7 @@ public class BallController : MonoBehaviour
 
         // Desenha a trajetória parabólica
         DrawParabolicTrajectory(start, end, jumpHeight, enemyDestiny[1].GetChild(0).position, jumpHeight / 2, 10);
-        transform.DOJump(end, enemyJumpForce, 1, enemySpeedForce)
+        transform.DOJump(end, enemyJumpForce, timeValue, enemySpeedForce)
             .SetEase(Ease.InSine)
             .OnComplete(() =>
             {
@@ -221,7 +222,7 @@ public class BallController : MonoBehaviour
                 Vector3 nextEnd = enemyDestiny[1].GetChild(0).position;
 
                 // Segundo salto
-                transform.DOJump(nextEnd, enemyJumpForce / 2, 1, enemySpeedForce)
+                transform.DOJump(nextEnd, enemyJumpForce / 2, timeValue, enemySpeedForce)
                     .SetEase(Ease.OutSine);
             });
     }
@@ -235,7 +236,7 @@ public class BallController : MonoBehaviour
 
         // Desenha a trajetória parabólica
         DrawParabolicTrajectory(start, end, jumpHeight, enemyDestiny[2].GetChild(0).position, jumpHeight / 2, 10);
-        transform.DOJump(end, enemyJumpForce, 1, enemySpeedForce)
+        transform.DOJump(end, enemyJumpForce, timeValue, enemySpeedForce)
             .SetEase(Ease.InSine)
             .OnComplete(() =>
             {
@@ -243,7 +244,7 @@ public class BallController : MonoBehaviour
                 Vector3 nextEnd = enemyDestiny[2].GetChild(0).position;
 
                 // Segundo salto
-                transform.DOJump(nextEnd, enemyJumpForce / 2, 1, enemySpeedForce)
+                transform.DOJump(nextEnd, enemyJumpForce / 2, timeValue, enemySpeedForce)
                     .SetEase(Ease.OutSine);
             });
     }
@@ -257,7 +258,7 @@ public class BallController : MonoBehaviour
 
         // Desenha a trajetória parabólica
         DrawParabolicTrajectory(start, end, jumpHeight, enemyDestiny[4].GetChild(0).position, jumpHeight / 2, 10);
-        transform.DOJump(end, enemyJumpForce, 1, enemySpeedForce)
+        transform.DOJump(end, enemyJumpForce, timeValue, enemySpeedForce)
             .SetEase(Ease.InSine)
             .OnComplete(() =>
             {
@@ -265,7 +266,7 @@ public class BallController : MonoBehaviour
                 Vector3 nextEnd = enemyDestiny[3].GetChild(0).position;
                 
                 // Segundo salto
-                transform.DOJump(nextEnd, enemyJumpForce / 2, 1, enemySpeedForce)
+                transform.DOJump(nextEnd, enemyJumpForce / 2, timeValue, enemySpeedForce)
                     .SetEase(Ease.OutSine);
             });
     }
