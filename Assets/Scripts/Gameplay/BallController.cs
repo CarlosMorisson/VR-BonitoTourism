@@ -27,6 +27,8 @@ public class BallController : MonoBehaviour
     private Dictionary<(int, int), Action> _actionMap;
     private float enemySpeedForce;
     [SerializeField]
+    private Vector2 enemySpeedForceRange;
+    [SerializeField]
     private float enemyJumpForce;
 
     public enum BallType
@@ -164,7 +166,7 @@ public class BallController : MonoBehaviour
         };
 
         // Gera um número aleatório
-        enemySpeedForce = UnityEngine.Random.Range(4, 5);
+        enemySpeedForce = UnityEngine.Random.Range(enemySpeedForceRange.x, enemySpeedForceRange.y);
         int randomAttack = UnityEngine.Random.Range(0, 12);
         Debug.Log($"Random attack: {randomAttack}");
 
@@ -200,7 +202,7 @@ public class BallController : MonoBehaviour
                 Vector3 nextEnd = enemyDestiny[0].GetChild(0).position;
 
                 // Segundo salto
-                transform.DOJump(nextEnd, enemyJumpForce / 2, timeValue, enemySpeedForce)
+                transform.DOJump(nextEnd, enemyJumpForce / 2, timeValue, enemySpeedForce/2)
                     .SetEase(Ease.OutSine);
             });
     }
@@ -222,7 +224,7 @@ public class BallController : MonoBehaviour
                 Vector3 nextEnd = enemyDestiny[1].GetChild(0).position;
 
                 // Segundo salto
-                transform.DOJump(nextEnd, enemyJumpForce / 2, timeValue, enemySpeedForce)
+                transform.DOJump(nextEnd, enemyJumpForce / 2, timeValue, enemySpeedForce/2)
                     .SetEase(Ease.OutSine);
             });
     }
@@ -244,7 +246,7 @@ public class BallController : MonoBehaviour
                 Vector3 nextEnd = enemyDestiny[2].GetChild(0).position;
 
                 // Segundo salto
-                transform.DOJump(nextEnd, enemyJumpForce / 2, timeValue, enemySpeedForce)
+                transform.DOJump(nextEnd, enemyJumpForce / 2, timeValue, enemySpeedForce/2)
                     .SetEase(Ease.OutSine);
             });
     }
@@ -266,7 +268,7 @@ public class BallController : MonoBehaviour
                 Vector3 nextEnd = enemyDestiny[3].GetChild(0).position;
                 
                 // Segundo salto
-                transform.DOJump(nextEnd, enemyJumpForce / 2, timeValue, enemySpeedForce)
+                transform.DOJump(nextEnd, enemyJumpForce / 2, timeValue, enemySpeedForce/2)
                     .SetEase(Ease.OutSine);
             });
     }

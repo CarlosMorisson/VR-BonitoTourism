@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.32617566, g: 0.26364255, b: 0.3755485, a: 1}
+  m_IndirectSpecularColor: {r: 0.32677716, g: 0.26410145, b: 0.37576988, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1520,6 +1520,7 @@ MonoBehaviour:
   - {fileID: 934679921}
   - {fileID: 966244463}
   - {fileID: 1024650901}
+  enemySpeedForceRange: {x: 6, y: 10}
   enemyJumpForce: 5
   ballType: 0
 --- !u!65 &298120118
@@ -9841,7 +9842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &857745428
 Transform:
   m_ObjectHideFlags: 0
@@ -10093,6 +10094,7 @@ MonoBehaviour:
   predictionSteps: 50
   predictionTimeStep: 0.05
   enemyDestiny: []
+  enemySpeedForceRange: {x: 6, y: 10}
   enemyJumpForce: 0
   ballType: 1
 --- !u!114 &862566945
@@ -10909,6 +10911,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _npcParent: {fileID: 0}
   _allNpc: []
+  distanceFromPlayer: 10
+  spacing: 3.5
+  verticalOffset: 5
 --- !u!1001 &1000158076
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17605,7 +17610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2468724716293098508, guid: 0614df52e24b86145af8d85b6bbb9fac, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2830007781207563871, guid: 0614df52e24b86145af8d85b6bbb9fac, type: 3}
       propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.size
