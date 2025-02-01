@@ -61,6 +61,7 @@ public class LoopNPCController : MonoBehaviour
             // Define a posição final do NPC
             _allNpc[i].DOMove(playerPosition + offset, 1f).SetEase(Ease.InOutSine);
 
+            _allNpc[i].DOScale(0.5f, 1f).SetEase(Ease.InOutSine);
             // Espera até que o movimento termine
             yield return _allNpc[i].DOMove(playerPosition + offset, 1f).WaitForCompletion();
 
