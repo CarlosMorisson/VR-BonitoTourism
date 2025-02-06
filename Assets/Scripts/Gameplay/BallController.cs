@@ -70,6 +70,8 @@ public class BallController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!gameObject.activeSelf)
+            return;
         // Detecção do chão
         if (((1 << other.gameObject.layer) & groundLayer) != 0)
         {
@@ -193,7 +195,7 @@ public class BallController : MonoBehaviour
         float jumpHeight = enemyJumpForce; // Ajuste conforme necessário
         int trajectoryResolution = 20; // Número de pontos na linha
 
-        DrawParabolicTrajectory(start, end, jumpHeight, enemyDestiny[0].GetChild(0).position, jumpHeight/2, 10);
+        DrawParabolicTrajectory(start, end, jumpHeight, enemyDestiny[0].GetChild(0).position, jumpHeight, 10);
         transform.DOJump(end, enemyJumpForce, timeValue, enemySpeedForce)
             .SetEase(Ease.InSine)
             .OnComplete(() =>
@@ -202,7 +204,7 @@ public class BallController : MonoBehaviour
                 Vector3 nextEnd = enemyDestiny[0].GetChild(0).position;
 
                 // Segundo salto
-                transform.DOJump(nextEnd, enemyJumpForce / 2, timeValue, enemySpeedForce/2)
+                transform.DOJump(nextEnd, enemyJumpForce, timeValue, enemySpeedForce/2)
                     .SetEase(Ease.OutSine);
             });
     }
@@ -215,7 +217,7 @@ public class BallController : MonoBehaviour
         int trajectoryResolution = 20; // Número de pontos na linha
 
         // Desenha a trajetória parabólica
-        DrawParabolicTrajectory(start, end, jumpHeight, enemyDestiny[1].GetChild(0).position, jumpHeight / 2, 10);
+        DrawParabolicTrajectory(start, end, jumpHeight, enemyDestiny[1].GetChild(0).position, jumpHeight, 10);
         transform.DOJump(end, enemyJumpForce, timeValue, enemySpeedForce)
             .SetEase(Ease.InSine)
             .OnComplete(() =>
@@ -224,7 +226,7 @@ public class BallController : MonoBehaviour
                 Vector3 nextEnd = enemyDestiny[1].GetChild(0).position;
 
                 // Segundo salto
-                transform.DOJump(nextEnd, enemyJumpForce / 2, timeValue, enemySpeedForce/2)
+                transform.DOJump(nextEnd, enemyJumpForce, timeValue, enemySpeedForce/2)
                     .SetEase(Ease.OutSine);
             });
     }
@@ -237,7 +239,7 @@ public class BallController : MonoBehaviour
         int trajectoryResolution = 20; // Número de pontos na linha
 
         // Desenha a trajetória parabólica
-        DrawParabolicTrajectory(start, end, jumpHeight, enemyDestiny[2].GetChild(0).position, jumpHeight / 2, 10);
+        DrawParabolicTrajectory(start, end, jumpHeight, enemyDestiny[2].GetChild(0).position, jumpHeight, 10);
         transform.DOJump(end, enemyJumpForce, timeValue, enemySpeedForce)
             .SetEase(Ease.InSine)
             .OnComplete(() =>
@@ -246,7 +248,7 @@ public class BallController : MonoBehaviour
                 Vector3 nextEnd = enemyDestiny[2].GetChild(0).position;
 
                 // Segundo salto
-                transform.DOJump(nextEnd, enemyJumpForce / 2, timeValue, enemySpeedForce/2)
+                transform.DOJump(nextEnd, enemyJumpForce, timeValue, enemySpeedForce/2)
                     .SetEase(Ease.OutSine);
             });
     }
@@ -259,7 +261,7 @@ public class BallController : MonoBehaviour
         int trajectoryResolution = 20; // Número de pontos na linha
 
         // Desenha a trajetória parabólica
-        DrawParabolicTrajectory(start, end, jumpHeight, enemyDestiny[4].GetChild(0).position, jumpHeight / 2, 10);
+        DrawParabolicTrajectory(start, end, jumpHeight, enemyDestiny[4].GetChild(0).position, jumpHeight, 10);
         transform.DOJump(end, enemyJumpForce, timeValue, enemySpeedForce)
             .SetEase(Ease.InSine)
             .OnComplete(() =>
@@ -268,11 +270,10 @@ public class BallController : MonoBehaviour
                 Vector3 nextEnd = enemyDestiny[3].GetChild(0).position;
                 
                 // Segundo salto
-                transform.DOJump(nextEnd, enemyJumpForce / 2, timeValue, enemySpeedForce/2)
+                transform.DOJump(nextEnd, enemyJumpForce, timeValue, enemySpeedForce/2)
                     .SetEase(Ease.OutSine);
             });
     }
-
 
     #endregion
 }

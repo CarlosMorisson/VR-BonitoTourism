@@ -1,5 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
+using System.Collections;
+
 public class PointController : MonoBehaviour
 {
     public static PointController Instance;
@@ -19,18 +21,22 @@ public class PointController : MonoBehaviour
     private int playerPoints = 0;      // Pontos do jogador
     private int enemyPoints = 0;       // Pontos do adversário
     private int bounceCount = 0;       // Número de quiques da bola
-    
+    private bool canPoint=true;
+    private bool isPointAwarded = false;
     private void OnTriggerEnter(Collider other)
     {
+        if (!gameObject.activeSelf)
+            return;
         // Detecta colisões com a rede
         if (IsInLayerMask(other.gameObject, netLayer))
         {
             HandleNetHit();
         }
         // Detecta colisões com os limites da quadra
-        else if (IsInLayerMask(other.gameObject, courtBoundsLayer))
+        else if (IsInLayerMask(other.gameObject, courtBoundsLayer) && !isPointAwarded)
         {
             HandleOutOfBounds();
+            isPointAwarded = true;
         }
         // Verifica se quicou na quadra válida
         else if (IsInLayerMask(other.gameObject, courtLayer))
@@ -101,33 +107,54 @@ public class PointController : MonoBehaviour
 
     private void AwardPointToPlayer()
     {
-        playerPoints++;
-        Debug.Log($"Jogador marcou um ponto! Pontuação: {playerPoints}");
-        UIController.instance.UpdateScore(false, playerPoints);
-        ResetBall();
+        if (canPoint)
+        {
+            canPoint = false;
+            playerPoints++;
+            Debug.Log($"Jogador marcou um ponto! Pontuação: {playerPoints}");
+            UIController.instance.UpdateScore(false, playerPoints);
+            ResetBall();
+        }
     }
 
     private void AwardPointToOpponent()
     {
-        enemyPoints++;
-        Debug.Log("ativou");
-        Debug.Log($"Adversário marcou um ponto! Pontuação: {enemyPoints}");
-        UIController.instance.UpdateScore(true, enemyPoints);
-        ResetBall();
+        if (canPoint)
+        {
+            canPoint = false;
+            enemyPoints++;
+            Debug.Log("ativou");
+            Debug.Log($"Adversário marcou um ponto! Pontuação: {enemyPoints}");
+            UIController.instance.UpdateScore(true, enemyPoints);
+            ResetBall();
+        }
     }
 
     public void ResetBall()
     {
-        // Reseta a posição da bola no centro da quadra
-        enemyBall.position = startPos.position;
+        // Desativar a bola do jogador
         ball.gameObject.SetActive(false);
+
+        // Ativar a bola do inimigo e posicioná-la
         enemyBall.gameObject.SetActive(true);
-        enemyBall.position = startPos.position;
-        enemyBall.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        StartCoroutine(GoToStartPoint());
+         
         bounceCount = 0;
+
+        // Permitir a pontuação novamente
+        canPoint = true;
+       
+        isPointAwarded = false;
+    }
+    private IEnumerator GoToStartPoint()
+    {
+        yield return new WaitForSeconds(5f);
+        enemyBall.position = startPos.position;
+
+        // Zerar a velocidade da bola do inimigo
+        enemyBall.GetComponent<Rigidbody>().velocity = Vector3.zero;
         enemyBall.transform.DOMoveZ(20, 5).SetLoops(-1, LoopType.Yoyo);
     }
-
     public void StartMatch()
     {
         playerPoints = 0;

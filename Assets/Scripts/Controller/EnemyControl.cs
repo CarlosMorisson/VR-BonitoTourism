@@ -13,7 +13,7 @@ public class EnemyControl : MonoBehaviour
 
     private Vector3 initialPosition;       // Posição inicial da raquete inimiga 
     public float rotationSpeed = 360f; // Velocidade de rotação (graus por segundo)
-    private bool isRotating = false;
+    private bool isAttacking = false;
     private void Start()
     {
         initialPosition = racket.position; // Salva a posição inicial da raquete
@@ -39,11 +39,13 @@ public class EnemyControl : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!gameObject.activeSelf || isAttacking)
+            return;
         // Verifica se a colisão é com a bola
         if (other.gameObject == PlayerBall.gameObject)
         {
             // Inicia a rotação
-            StartCoroutine(Rotate360());
+            isAttacking = true;
             Debug.Log("Enemy");
             PlayerBall.gameObject.SetActive(false);
 
@@ -51,14 +53,16 @@ public class EnemyControl : MonoBehaviour
             EnemyBall.transform.rotation = transform.rotation;
             EnemyBall.transform.position = transform.position + transform.forward * 0.5f; // Ajuste de posição
             EnemyBall.gameObject.SetActive(true);
-            EnemyBall.GetComponent<BallController>().EnemyAttack();
+            if(isAttacking)
+                EnemyBall.GetComponent<BallController>().EnemyAttack();
+            StartCoroutine(Rotate360());
         }
       
     }
 
     private IEnumerator Rotate360()
     {
-        isRotating = true; // Marca como rotacionando
+        
         float totalRotation = 0f;
 
         // Rotaciona gradualmente até completar 360 graus
@@ -72,7 +76,7 @@ public class EnemyControl : MonoBehaviour
 
         // Corrige a rotação final (para evitar imprecisões)
         racket.rotation = Quaternion.Euler(racket.rotation.eulerAngles.x, 0f, racket.rotation.eulerAngles.z);
-
-        isRotating = false; // Marca como não rotacionando
+        yield return new WaitForSeconds(3f);
+        isAttacking = false;
     }
 }
